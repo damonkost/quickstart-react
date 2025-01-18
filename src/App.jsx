@@ -14,66 +14,96 @@ const App = () => {
 
   const [assistantIsSpeaking, setAssistantIsSpeaking] = useState(false);
   const [volumeLevel, setVolumeLevel] = useState(0);
+  const [microphoneAllowed, setMicrophoneAllowed] = useState(false); // Add state for microphone permission
 
   const { showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage } = usePublicKeyInvalid();
 
   // hook into Vapi events
   useEffect(() => {
-    vapi.on("call-start", () => {
+    const handleCallStart = () => {
       setConnecting(false);
       setConnected(true);
 
       setShowPublicKeyInvalidMessage(false);
-    });
+    };
 
-    vapi.on("call-end", () => {
+    const handleCallEnd = () => {
       setConnecting(false);
       setConnected(false);
 
       setShowPublicKeyInvalidMessage(false);
-    });
+    };
 
-    vapi.on("speech-start", () => {
+    const handleSpeechStart = () => {
       setAssistantIsSpeaking(true);
-    });
+    };
 
-    vapi.on("speech-end", () => {
+    const handleSpeechEnd = () => {
       setAssistantIsSpeaking(false);
-    });
+    };
 
-    vapi.on("volume-level", (level) => {
+    const handleVolumeLevel = (level) => {
       setVolumeLevel(level);
-    });
+    };
 
-    vapi.on("error", (error) => {
+    const handleError = (error) => {
       console.error(error);
 
       setConnecting(false);
       if (isPublicKeyMissingError({ vapiError: error })) {
         setShowPublicKeyInvalidMessage(true);
       }
-    });
+    };
 
-    // we only want this to fire on mount
+    // Add event listeners
+    vapi.on("call-start", handleCallStart);
+    vapi.on("call-end", handleCallEnd);
+    vapi.on("speech-start", handleSpeechStart);
+    vapi.on("speech-end", handleSpeechEnd);
+    vapi.on("volume-level", handleVolumeLevel);
+    vapi.on("error", handleError);
+
+    // Clean up event listeners on unmount
+    return () => {
+      vapi.off("call-start", handleCallStart);
+      vapi.off("call-end", handleCallEnd);
+      vapi.off("speech-start", handleSpeechStart);
+      vapi.off("speech-end", handleSpeechEnd);
+      vapi.off("volume-level", handleVolumeLevel);
+      vapi.off("error", handleError);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // call start handler
-  const startCallInline = () => {
+  const startCallInline = async () => { 
     setConnecting(true);
 
-    const assistantOverrides = {
-      transcriber: {
-        provider: "deepgram",
-        model: "nova-2",
-        language: "en-US",
-      },
-      recordingEnabled: false , // Override to disable recording
+    try {
+      // Request microphone access
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+      setMicrophoneAllowed(true); 
 
-    };
+      const assistantOverrides = {
+        transcriber: {
+          provider: "deepgram",
+          model: "nova-2",
+          language: "en-US",
+        },
+        recordingEnabled: true, 
+        // Add any other overrides you need here, like:
+        // endCallOnNoSpeech: false,  // Disable automatic end on no speech
+        // maxDuration: 3600,        // Set a longer max duration (in seconds) 
+      };
 
-    vapi.start('e3fff1dd-2e82-4cce-ac6c-8c3271eb0865', assistantOverrides); // Start the call with the specified assistant ID and overrides
+      vapi.start('e3fff1dd-2e82-4cce-ac6c-8c3271eb0865', assistantOverrides); 
+    } catch (error) {
+      console.error("Error accessing microphone:", error);
+      setConnecting(false);
+      // Handle microphone access errors (e.g., display an error message)
+    }
   };
+
   const endCall = () => {
     vapi.stop();
   };
@@ -93,7 +123,8 @@ const App = () => {
           label="Call Scout"
           onClick={startCallInline}
           isLoading={connecting}
-          icon={<LegalScoutIcon />} // Use the custom icon component
+          disabled={!microphoneAllowed} // Disable button if mic access is not allowed
+          icon={<LegalScoutIcon />} 
         />
       ) : (
         <ActiveCallDetail
@@ -108,10 +139,10 @@ const App = () => {
   );
 };
 
-// Define the custom icon component
+// Make sure the image URL is correct and accessible
 const LegalScoutIcon = () => (
   <img
-    src="https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png"
+    src="https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png" 
     alt="LegalScout Icon"
     style={{ width: "24px", height: "24px" }}
   />

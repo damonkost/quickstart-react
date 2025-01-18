@@ -1,10 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import { Stage, Layer, Line } from 'react-konva'; 
 
-import ActiveCallDetail from "./components/ActiveCallDetail";
-import Button from "./components/base/Button";
+import Button from "./components/base/Button"; // Assuming this is your Button component
 import Vapi from "@vapi-ai/web";
-import { isPublicKeyMissingError } from "./utils";
+import { isPublicKeyMissingError } from "./utils"; // Assuming this is your utility function
 
 // Put your Vapi Public Key below.
 const vapi = new Vapi("YOUR_VAPI_PUBLIC_KEY_HERE"); // Replace with your actual public key

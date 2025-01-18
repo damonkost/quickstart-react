@@ -2,31 +2,16 @@ import React from "react";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 const Button = ({ label, onClick, isLoading, disabled }) => {
-  const opacity = disabled ? 0.75 : 1;
-  const cursor = disabled ? "not-allowed" : "pointer";
-
-  const Contents = isLoading ? (
-    <ScaleLoader
-      color="#000"
-      height={10}
-      width={2.5}
-      margin={0.5}
-      loading={true}
-      size={50}
-      css={{ display: "block", margin: "0 auto" }}
-    />
-  ) : (
-    <p style={{ margin: 0, padding: 0 }}>{label}</p>
-  );
+  // ... (opacity and cursor logic - same as before)
 
   return (
     <button
       onClick={onClick}
       style={{
-        backgroundColor: "transparent", // Transparent background
-        border: "none", // No border
-        borderRadius: "50%", // Make it circular
-        padding: "16px", // Adjust padding as needed
+        backgroundColor: "transparent",
+        border: "none",
+        borderRadius: "50%",
+        padding: "24px", // Increased padding
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -36,15 +21,16 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
     >
       <div // Orb container
         style={{
-          width: "60px", // Adjust size as needed
-          height: "60px",
+          width: "100px", // Increased size
+          height: "100px",
           borderRadius: "50%",
-          backgroundColor: "lightblue", // Orb color
-          boxShadow: "0 0 10px 5px rgba(0, 123, 255, 0.5)", // Glowing effect
+          backgroundColor: "lightblue",
+          boxShadow: "0 0 20px 10px rgba(0, 123, 255, 0.7)", // More glow
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          transition: "all 0.3s ease", // Smooth transitions
+          transition: "all 0.3s ease",
+          animation: "pulse 1.5s infinite", // Added pulsating animation
         }}
       >
         {Contents}

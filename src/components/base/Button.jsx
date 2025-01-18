@@ -22,7 +22,7 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
         padding: 0,
         fontFamily: "Courier, monospace",
         fontWeight: "bold",
-        fontSize: "18px",
+        fontSize: "38px",
         background: "linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8f00ff)",
         backgroundSize: "400% 400%",
         WebkitBackgroundClip: "text",

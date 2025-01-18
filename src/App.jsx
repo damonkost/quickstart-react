@@ -90,7 +90,7 @@ const App = () => {
     >
       {!connected ? (
         <Button
-          label="Call LegalScout"
+          label="Call Scout"
           onClick={startCallInline}
           isLoading={connecting}
           icon={<LegalScoutIcon />} // Use the custom icon component

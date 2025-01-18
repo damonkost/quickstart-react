@@ -61,8 +61,22 @@ const App = () => {
   // call start handler
   const startCallInline = () => {
     setConnecting(true);
-    vapi.start('e3fff1dd-2e82-4cce-ac6c-8c3271eb0865'); // Start call with the specified assistant ID
+
+    const assistantOverrides = {
+      transcriber: {
+        provider: "deepgram",
+        model: "nova-2",
+        language: "en-US",
+      },
+      recordingEnabled: false, // Example override: disable recording
+      variableValues: {
+        name: "Alice", // Example override: set a template variable
+      },
+    };
+
+    vapi.start('e3fff1dd-2e82-4cce-ac6c-8c3271eb0865', assistantOverrides); 
   };
+
   const endCall = () => {
     vapi.stop();
   };

@@ -6,7 +6,7 @@ import Vapi from "@vapi-ai/web";
 import { isPublicKeyMissingError } from "./utils";
 
 // Put your Vapi Public Key below.
-const vapi = new Vapi("310f0d43-27c2-47a5-a76d-e55171d024f7"); // Replace with your actual public key
+const vapi = new Vapi("YOUR_VAPI_PUBLIC_KEY"); // Replace with your actual public key
 
 const App = () => {
   const [connecting, setConnecting] = useState(false);
@@ -47,7 +47,7 @@ const App = () => {
     });
 
     vapi.on("error", (error) => {
-      console.error(error);
+      console.error("Vapi Error:", error);
 
       setConnecting(false);
       if (isPublicKeyMissingError({ vapiError: error })) {
@@ -75,7 +75,10 @@ const App = () => {
       },
     };
 
-    vapi.start('e3fff1dd-2e82-4cce-ac6c-8c3271eb0865', assistantOverrides); // Start the call with the specified assistant ID and overrides
+    vapi.start(
+      "e3fff1dd-2e82-4cce-ac6c-8c3271eb0865", // Start the call with the specified assistant ID
+      assistantOverrides
+    );
   };
 
   const endCall = () => {
@@ -107,12 +110,56 @@ const App = () => {
       )}
 
       {showPublicKeyInvalidMessage ? <PleaseSetYourPublicKeyMessage /> : null}
-      <ReturnToDocsLink />
     </div>
   );
 };
 
-// ... (The rest of the code, including usePublicKeyInvalid, PleaseSetYourPublicKeyMessage, 
-// and ReturnToDocsLink, remains the same as in your original code)
+// Define and use your custom icon
+const LegalScoutIcon = (props) => (
+  <img
+    src="https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png"
+    alt="LegalScout Icon"
+    style={{ width: "24px", height: "24px" }}
+  />
+);
+
+const usePublicKeyInvalid = () => {
+  const [showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage] =
+    useState(false);
+
+  useEffect(() => {
+    if (showPublicKeyInvalidMessage) {
+      setTimeout(() => {
+        setShowPublicKeyInvalidMessage(false);
+      }, 3000);
+    }
+  }, [showPublicKeyInvalidMessage]);
+
+  return {
+    showPublicKeyInvalidMessage,
+    setShowPublicKeyInvalidMessage,
+  };
+};
+
+const PleaseSetYourPublicKeyMessage = () => {
+  return (
+    <div
+      style={{
+        position: "fixed",
+        bottom: "25px",
+        left: "25px",
+        padding: "10px",
+        color: "#fff",
+        backgroundColor: "#f03e3e",
+        borderRadius: "5px",
+        boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
+      }}
+    >
+      Is your Vapi Public Key missing? (recheck your code)
+    </div>
+  );
+};
+
+// Removed the ReturnToDocsLink component as it's not required for your use case.
 
 export default App;

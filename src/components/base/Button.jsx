@@ -2,7 +2,7 @@ import React from "react";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 const Button = ({ label, onClick, isLoading, disabled }) => {
-  const opacity = disabled ? 0.35 : 1;
+  const opacity = disabled ? 0.75 : 1;
   const cursor = disabled ? "not-allowed" : "pointer";
 
   const Contents = isLoading ? (
@@ -22,9 +22,8 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
         padding: 0,
         fontFamily: "Courier, monospace",
         fontWeight: "bold",
-        fontSize: "28px",
-        background:
-          "linear-gradient(to right, #f0f0f0, #d9d9d9, #bdbdbd, #969696, #737373, #525252, #282828, #000000)",
+        fontSize: "18px",
+        background: "linear-gradient(to right, #f0f0f0, #d9d9d9, #bdbdbd, #969696, #737373, #525252, #282828, #000000)", // Shimmer effect
         backgroundSize: "400% 400%",
         WebkitBackgroundClip: "text",
         WebkitTextFillColor: "transparent",
@@ -47,16 +46,16 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
         justifyContent: "center",
         alignItems: "center",
         cursor,
-        opacity: .5,
+        opacity,
       }}
     >
       <div
         style={{
-          width: "400px",
-          height: "400px",
+          width: "100px",
+          height: "100px",
           borderRadius: "50%",
           backgroundColor: "lightblue",
-          boxShadow: "0 0 20px 10px rgba(0, 123, 255, 0.25)",
+          boxShadow: "0 0 20px 10px rgba(0, 123, 255, 0.7)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

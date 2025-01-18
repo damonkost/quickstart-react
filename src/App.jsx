@@ -68,10 +68,8 @@ const App = () => {
         model: "nova-2",
         language: "en-US",
       },
-      recordingEnabled: false, // Override to disable recording
-      variableValues: {
-        name: "Alice", // Override to set a template variable
-      },
+      recordingEnabled: true, // Override to disable recording
+      ,
     };
 
     vapi.start('e3fff1dd-2e82-4cce-ac6c-8c3271eb0865', assistantOverrides); // Start the call with the specified assistant ID and overrides

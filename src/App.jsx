@@ -1,30 +1,35 @@
 import { useEffect, useState } from "react";
+
 import ActiveCallDetail from "./components/ActiveCallDetail";
 import Button from "./components/base/Button";
 import Vapi from "@vapi-ai/web";
 import { isPublicKeyMissingError } from "./utils";
 
 // Put your Vapi Public Key below.
-const vapi = new Vapi("310f0d43-27c2-47a5-a76d-e55171d024f7");
+const vapi = new Vapi("310f0d43-27c2-47a5-a76d-e55171d024f7"); // Replace with your actual public key
 
 const App = () => {
   const [connecting, setConnecting] = useState(false);
   const [connected, setConnected] = useState(false);
+
   const [assistantIsSpeaking, setAssistantIsSpeaking] = useState(false);
   const [volumeLevel, setVolumeLevel] = useState(0);
 
   const { showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage } = usePublicKeyInvalid();
 
+  // hook into Vapi events
   useEffect(() => {
     vapi.on("call-start", () => {
       setConnecting(false);
       setConnected(true);
+
       setShowPublicKeyInvalidMessage(false);
     });
 
     vapi.on("call-end", () => {
       setConnecting(false);
       setConnected(false);
+
       setShowPublicKeyInvalidMessage(false);
     });
 
@@ -42,18 +47,22 @@ const App = () => {
 
     vapi.on("error", (error) => {
       console.error(error);
+
       setConnecting(false);
       if (isPublicKeyMissingError({ vapiError: error })) {
         setShowPublicKeyInvalidMessage(true);
       }
     });
-  }, [setShowPublicKeyInvalidMessage]);
 
+    // we only want this to fire on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // call start handler
   const startCallInline = () => {
     setConnecting(true);
-    vapi.start(assistantOptions);
+    vapi.start('e3fff1dd-2e82-4cce-ac6c-8c3271eb0865'); // Start call with the specified assistant ID
   };
-
   const endCall = () => {
     vapi.stop();
   };
@@ -88,24 +97,10 @@ const App = () => {
   );
 };
 
-const assistantOptions = {
-  assistantId: "e3fff1dd-2e82-4cce-ac6c-8c3271eb0865",
-  name: "LegalScout",
-  firstMessage: "Hi, I'm Scout, your AI legal assistant from LegalScout! I'm here to help understand your legal matter and guide you through the process of finding the right attorney if needed. Let's start by getting your email address so I can send you updates about your case.",
-  transcriber: {
-    provider: "deepgram",
-    model: "nova-2",
-    language: "en-US",
-  },
-  voice: {
-    provider: "playht",
-    voiceId: "jennifer",
-  }
-};
-
 const usePublicKeyInvalid = () => {
   const [showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage] = useState(false);
 
+  // close public key invalid message after delay
   useEffect(() => {
     if (showPublicKeyInvalidMessage) {
       setTimeout(() => {

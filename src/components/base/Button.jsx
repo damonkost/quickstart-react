@@ -51,8 +51,8 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
     >
       <div
         style={{
-          width: "100px",
-          height: "100px",
+          width: "300px",
+          height: "300px",
           borderRadius: "50%",
           backgroundColor: "lightblue",
           boxShadow: "0 0 20px 10px rgba(0, 123, 255, 0.7)",
@@ -60,7 +60,7 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
           justifyContent: "center",
           alignItems: "center",
           transition: "all 0.3s ease",
-          animation: "pulse 1.5s infinite",
+          animation: "pulse 1.1s infinite",
         }}
       >
         {Contents}

@@ -89,7 +89,9 @@ const App = () => {
 };
 
 const assistantOptions = {
-  assistantId: "e3fff1dd-2e82-4cce-ac6c-8c3271eb0865"
+  assistantId: "e3fff1dd-2e82-4cce-ac6c-8c3271eb0865",
+  name: "LegalScout",
+  firstMessage: "Hi, I'm Scout, your AI legal assistant from LegalScout! I'm here to help understand your legal matter and guide you through the process of finding the right attorney if needed. Let's start by getting your email address so I can send you updates about your case."
 };
 
 const usePublicKeyInvalid = () => {

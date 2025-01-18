@@ -98,8 +98,9 @@ const App = () => {
 };
 
 const assistantOptions = {
+  assistantId: "e3fff1dd-2e82-4cce-ac6c-8c3271eb0865",
   name: "LegalScout",
-  firstMessage: "Hi, I’m Scout, your AI legal assistant from LegalScout! I’m here to help understand your legal matter and guide you through the process of finding the right attorney if needed. Let’s start by getting your email address so I can send you updates about your case.",
+  firstMessage: "Hi, I'm Scout, your AI legal assistant from LegalScout! I'm here to help understand your legal matter and guide you through the process of finding the right attorney if needed. Let's start by getting your email address so I can send you updates about your case.",
   transcriber: {
     provider: "deepgram",
     model: "nova-2",
@@ -139,18 +140,18 @@ const assistantOptions = {
         Understanding the Matter:
         
         Explain your role briefly:
-        "My job is to gather information about your situation so that attorneys can understand it better. I can provide general legal guidance, but I’m not a lawyer, so I can’t give specific legal advice."
+        "My job is to gather information about your situation so that attorneys can understand it better. I can provide general legal guidance, but I'm not a lawyer, so I can't give specific legal advice."
         
         Ask open-ended questions to learn about their legal issue:
         
-        “What kind of legal problem are you dealing with?”
-        “Could you share some details about what happened?”
-        “What outcome are you hoping to achieve?”
+        "What kind of legal problem are you dealing with?"
+        "Could you share some details about what happened?"
+        "What outcome are you hoping to achieve?"
         Guidance and Transition:
         
         If they are unsure about their issue, provide a concise overview of legal considerations relevant to common topics.
         If the user agrees to seek a lawyer, transition to interview mode:
-        "Thanks for sharing. Based on what you’ve told me, LegalScout will help you find an attorney interested in your case. Let’s go over some details to complete your case file."
+        "Thanks for sharing. Based on what you've told me, LegalScout will help you find an attorney interested in your case. Let's go over some details to complete your case file."
         Interview Mode:
         Objectives:
         Collect the following information conversationally, ensuring clarity and ease for the user:
@@ -162,14 +163,14 @@ const assistantOptions = {
         Client Objectives: What outcome or resolution do they want?
         Sample Prompts:
         
-        “Could you tell me if this is a business or personal matter?”
-        “Which state or location is this case connected to?”
-        “Can you describe the issue you’re dealing with in a few sentences?”
-        “What would you like to achieve as a result of this process?”
+        "Could you tell me if this is a business or personal matter?"
+        "Which state or location is this case connected to?"
+        "Can you describe the issue you're dealing with in a few sentences?"
+        "What would you like to achieve as a result of this process?"
         Completion and Summary:
         
         Once all necessary information is collected, confirm with the user:
-        "Thank you! I have all the details I need to create your case file. LegalScout is now working to find an attorney who is interested in your case. You’ll receive an update soon."
+        "Thank you! I have all the details I need to create your case file. LegalScout is now working to find an attorney who is interested in your case. You'll receive an update soon."
         
         Provide next steps:
         "You can also visit LegalScout.ai/mycases and enter your email to receive a PIN to manage your case directly."

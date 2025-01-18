@@ -1,3 +1,4 @@
+import React from "react";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 const Button = ({ label, onClick, isLoading, disabled }) => {
@@ -22,20 +23,32 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
     <button
       onClick={onClick}
       style={{
-        backgroundColor: "white",
-        color: "black",
-        border: "2px solid #ddd",
-        borderRadius: "8px",
-        padding: "8px 20px",
-        fontSize: "16px",
-        outline: "none",
-        boxShadow: "0px 4px 8px rgba(0,0,0,0.1)",
-        transition: "all 0.3s ease",
-        opacity,
+        backgroundColor: "transparent", // Transparent background
+        border: "none", // No border
+        borderRadius: "50%", // Make it circular
+        padding: "16px", // Adjust padding as needed
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         cursor,
+        opacity,
       }}
     >
-      {Contents}
+      <div // Orb container
+        style={{
+          width: "60px", // Adjust size as needed
+          height: "60px",
+          borderRadius: "50%",
+          backgroundColor: "lightblue", // Orb color
+          boxShadow: "0 0 10px 5px rgba(0, 123, 255, 0.5)", // Glowing effect
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          transition: "all 0.3s ease", // Smooth transitions
+        }}
+      >
+        {Contents}
+      </div>
     </button>
   );
 };

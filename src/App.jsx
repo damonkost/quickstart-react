@@ -6,7 +6,7 @@ import Vapi from "@vapi-ai/web";
 import { isPublicKeyMissingError } from "./utils";
 
 // Put your Vapi Public Key below.
-const vapi = new Vapi("YOUR_VAPI_PUBLIC_KEY"); 
+const vapi = new Vapi("310f0d43-27c2-47a5-a76d-e55171d024f7"); // Replace with your actual public key
 
 const App = () => {
   const [connecting, setConnecting] = useState(false);
@@ -15,66 +15,51 @@ const App = () => {
   const [assistantIsSpeaking, setAssistantIsSpeaking] = useState(false);
   const [volumeLevel, setVolumeLevel] = useState(0);
 
-  const { showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage } =
-    usePublicKeyInvalid();
+  const { showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage } = usePublicKeyInvalid();
 
   // hook into Vapi events
   useEffect(() => {
-    const handleCallStart = () => {
+    vapi.on("call-start", () => {
       setConnecting(false);
       setConnected(true);
-      setShowPublicKeyInvalidMessage(false);
-    };
 
-    const handleCallEnd = () => {
+      setShowPublicKeyInvalidMessage(false);
+    });
+
+    vapi.on("call-end", () => {
       setConnecting(false);
       setConnected(false);
+
       setShowPublicKeyInvalidMessage(false);
-    };
+    });
 
-    const handleSpeechStart = () => {
+    vapi.on("speech-start", () => {
       setAssistantIsSpeaking(true);
-    };
+    });
 
-    const handleSpeechEnd = () => {
+    vapi.on("speech-end", () => {
       setAssistantIsSpeaking(false);
-    };
+    });
 
-    const handleVolumeLevel = (level) => {
+    vapi.on("volume-level", (level) => {
       setVolumeLevel(level);
-    };
+    });
 
-    const handleError = (error) => {
-      console.error("Vapi Error:", error);
+    vapi.on("error", (error) => {
+      console.error(error);
+
       setConnecting(false);
       if (isPublicKeyMissingError({ vapiError: error })) {
         setShowPublicKeyInvalidMessage(true);
       }
-    };
+    });
 
-    // Attach event listeners
-    vapi.on("call-start", handleCallStart);
-    vapi.on("call-end", handleCallEnd);
-    vapi.on("speech-start", handleSpeechStart);
-    vapi.on("speech-end", handleSpeechEnd);
-    vapi.on("volume-level", handleVolumeLevel);
-    vapi.on("error", handleError);
-
-    // Clean up event listeners on unmount
-    return () => {
-      vapi.off("call-start", handleCallStart);
-      vapi.off("call-end", handleCallEnd);
-      vapi.off("speech-start", handleSpeechStart);
-      vapi.off("speech-end", handleSpeechEnd);
-      vapi.off("volume-level", handleVolumeLevel);
-      vapi.off("error", handleError);
-    };
-
+    // we only want this to fire on mount
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // call start handler
-  const startCallInline = async () => {
+  const startCallInline = () => {
     setConnecting(true);
 
     const assistantOverrides = {
@@ -83,20 +68,14 @@ const App = () => {
         model: "nova-2",
         language: "en-US",
       },
-      recordingEnabled: false, 
+      recordingEnabled: false, // Override to disable recording
       variableValues: {
-        name: "Alice", 
+        name: "Alice", // Override to set a template variable
       },
     };
 
-    try {
-      await vapi.start("e3fff1dd-2e82-4cce-ac6c-8c3271eb0865", assistantOverrides);
-    } catch (error) {
-      console.error("Error starting call:", error);
-      setConnecting(false);
-    }
+    vapi.start('e3fff1dd-2e82-4cce-ac6c-8c3271eb0865', assistantOverrides); // Start the call with the specified assistant ID and overrides
   };
-
   const endCall = () => {
     vapi.stop();
   };
@@ -116,6 +95,7 @@ const App = () => {
           label="Call LegalScout"
           onClick={startCallInline}
           isLoading={connecting}
+          icon={<LegalScoutIcon />} // Use the custom icon component
         />
       ) : (
         <ActiveCallDetail
@@ -125,18 +105,24 @@ const App = () => {
         />
       )}
 
-      {showPublicKeyInvalidMessage ? (
-        <PleaseSetYourPublicKeyMessage />
-      ) : null}
-      <ReturnToDocsLink />
+      {showPublicKeyInvalidMessage ? <PleaseSetYourPublicKeyMessage /> : null}
     </div>
   );
 };
 
-const usePublicKeyInvalid = () => {
-  const [showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage] =
-    useState(false);
+// Define the custom icon component
+const LegalScoutIcon = () => (
+  <img
+    src="https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png"
+    alt="LegalScout Icon"
+    style={{ width: "24px", height: "24px" }}
+  />
+);
 
+const usePublicKeyInvalid = () => {
+  const [showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage] = useState(false);
+
+  // close public key invalid message after delay
   useEffect(() => {
     if (showPublicKeyInvalidMessage) {
       setTimeout(() => {
@@ -167,28 +153,6 @@ const PleaseSetYourPublicKeyMessage = () => {
     >
       Is your Vapi Public Key missing? (recheck your code)
     </div>
-  );
-};
-
-const ReturnToDocsLink = () => {
-  return (
-    <a
-      href="https://docs.vapi.ai"
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{
-        position: "fixed",
-        top: "25px",
-        right: "25px",
-        padding: "5px 10px",
-        color: "#fff",
-        textDecoration: "none",
-        borderRadius: "5px",
-        boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
-      }}
-    >
-      return to docs
-    </a>
   );
 };
 

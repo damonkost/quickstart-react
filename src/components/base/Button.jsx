@@ -23,7 +23,7 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
         fontFamily: "Courier, monospace",
         fontWeight: "bold",
         fontSize: "18px",
-        background: "linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8f00ff)", // Vibrant gradient
+        background: "linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8f00ff)",
         backgroundSize: "400% 400%",
         WebkitBackgroundClip: "text",
         WebkitTextFillColor: "transparent",
@@ -55,8 +55,7 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
           height: "100px",
           borderRadius: "50%",
           backgroundColor: "lightblue",
-          // Box shadow will now also pulse
-          boxShadow: "0 0 20px 10px rgba(0, 123, 255, 0.7)", 
+          boxShadow: "0 0 20px 10px rgba(0, 123, 255, 0.7)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

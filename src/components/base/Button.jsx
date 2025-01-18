@@ -52,6 +52,7 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
         style={{
           width: "300px",
           height: "300px",
+          borderRadius: "50%", // Make it a circle
           background: "radial-gradient(circle at 50% 50%, rgba(0, 0, 100, 0.8), rgba(0, 0, 50, 0.2))", // Dark blue transparent gradient
           boxShadow: "0 0 20px 10px rgba(0, 0, 100, 0.7)", // Dark blue shadow
           display: "flex",

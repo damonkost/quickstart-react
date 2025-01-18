@@ -6,7 +6,7 @@ import Vapi from "@vapi-ai/web";
 import { isPublicKeyMissingError } from "./utils";
 
 // Put your Vapi Public Key below.
-const vapi = new Vapi("YOUR_VAPI_PUBLIC_KEY"); // Replace with your actual public key
+const vapi = new Vapi("310f0d43-27c2-47a5-a76d-e55171d024f7"); // Replace with your actual public key
 
 const App = () => {
   const [connecting, setConnecting] = useState(false);
@@ -15,8 +15,7 @@ const App = () => {
   const [assistantIsSpeaking, setAssistantIsSpeaking] = useState(false);
   const [volumeLevel, setVolumeLevel] = useState(0);
 
-  const { showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage } =
-    usePublicKeyInvalid();
+  const { showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage } = usePublicKeyInvalid();
 
   // hook into Vapi events
   useEffect(() => {
@@ -47,7 +46,7 @@ const App = () => {
     });
 
     vapi.on("error", (error) => {
-      console.error("Vapi Error:", error);
+      console.error(error);
 
       setConnecting(false);
       if (isPublicKeyMissingError({ vapiError: error })) {
@@ -69,18 +68,14 @@ const App = () => {
         model: "nova-2",
         language: "en-US",
       },
-      recordingEnabled: false, // Example override: disable recording
+      recordingEnabled: false, // Override to disable recording
       variableValues: {
-        name: "Alice", // Example override: set a template variable
+        name: "Alice", // Override to set a template variable
       },
     };
 
-    vapi.start(
-      "e3fff1dd-2e82-4cce-ac6c-8c3271eb0865", // Start the call with the specified assistant ID
-      assistantOverrides
-    );
+    vapi.start('e3fff1dd-2e82-4cce-ac6c-8c3271eb0865', assistantOverrides); // Start the call with the specified assistant ID and overrides
   };
-
   const endCall = () => {
     vapi.stop();
   };
@@ -100,6 +95,7 @@ const App = () => {
           label="Call LegalScout"
           onClick={startCallInline}
           isLoading={connecting}
+          icon={<LegalScoutIcon />} // Use the custom icon component
         />
       ) : (
         <ActiveCallDetail
@@ -114,8 +110,8 @@ const App = () => {
   );
 };
 
-// Define and use your custom icon
-const LegalScoutIcon = (props) => (
+// Define the custom icon component
+const LegalScoutIcon = () => (
   <img
     src="https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png"
     alt="LegalScout Icon"
@@ -124,9 +120,9 @@ const LegalScoutIcon = (props) => (
 );
 
 const usePublicKeyInvalid = () => {
-  const [showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage] =
-    useState(false);
+  const [showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage] = useState(false);
 
+  // close public key invalid message after delay
   useEffect(() => {
     if (showPublicKeyInvalidMessage) {
       setTimeout(() => {
@@ -159,7 +155,5 @@ const PleaseSetYourPublicKeyMessage = () => {
     </div>
   );
 };
-
-// Removed the ReturnToDocsLink component as it's not required for your use case.
 
 export default App;

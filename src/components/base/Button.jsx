@@ -47,7 +47,7 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
         justifyContent: "center",
         alignItems: "center",
         cursor,
-        opacity,
+        opacity: .5,
       }}
     >
       <div
@@ -56,7 +56,7 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
           height: "400px",
           borderRadius: "50%",
           backgroundColor: "lightblue",
-          boxShadow: "0 0 20px 10px rgba(0, 123, 255, 0.7)",
+          boxShadow: "0 0 20px 10px rgba(0, 123, 255, 0.25)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

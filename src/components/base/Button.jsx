@@ -40,7 +40,6 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
       style={{
         backgroundColor: "transparent",
         border: "none",
-        borderRadius: "50%",
         padding: "24px",
         display: "flex",
         justifyContent: "center",
@@ -53,35 +52,15 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
         style={{
           width: "300px",
           height: "300px",
-          // borderRadius: "50%", // Remove border radius for amorphous shape
-          backgroundColor: "rgba(135, 206, 250, 0.5)", // Light blue with transparency
-          boxShadow: "0 0 20px 10px rgba(0, 123, 255, 0.7)",
+          background: "radial-gradient(circle at 50% 50%, rgba(0, 0, 100, 0.8), rgba(0, 0, 50, 0.2))", // Dark blue transparent gradient
+          boxShadow: "0 0 20px 10px rgba(0, 0, 100, 0.7)", // Dark blue shadow
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           transition: "all 0.3s ease",
-          animation: "pulse 1.1s infinite, morph 3s ease-in-out infinite alternate", // Add morph animation
-          position: "relative", // To position the whisps
-          overflow: "hidden", // To hide whisps that extend beyond the blob
+          animation: "pulse 1.1s infinite, morph 3s ease-in-out infinite alternate",
         }}
       >
-        {/* Whisps */}
-        {Array.from({ length: 5 }).map((_, index) => (
-          <div
-            key={index}
-            style={{
-              position: "absolute",
-              width: "50px",
-              height: "50px",
-              borderRadius: "50%",
-              backgroundColor: "rgba(255, 255, 255, 0.3)", // White with transparency
-              animation: `whisp ${index + 2}s ease-in-out infinite alternate`, // Different animation duration for each whisp
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
-
         {Contents}
       </div>
     </button>

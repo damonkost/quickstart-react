@@ -20,7 +20,7 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
       style={{
         margin: 0,
         padding: 0,
-        fontFamily: "Roboto",
+        fontFamily: "Courier, monospace",
         fontWeight: "bold",
         fontSize: "38px",
         background: "linear-gradient(to right, #000000, ##FF7F27, #000000, #FF7F27, #000000, #525252, #FF7F27, #000000)", // Shimmer effect

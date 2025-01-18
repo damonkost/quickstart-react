@@ -98,22 +98,8 @@ const App = () => {
 };
 
 const assistantOptions = {
-  assistantId: "e3fff1dd-2e82-4cce-ac6c-8c3271eb0865",
-  name: "LegalScout",
-  firstMessage: "Hi, I'm Scout, your AI legal assistant from LegalScout! I'm here to help understand your legal matter and guide you through the process of finding the right attorney if needed. Let's start by getting your email address so I can send you updates about your case.",
-  transcriber: {
-    provider: "deepgram",
-    model: "nova-2",
-    language: "en-US",
-  },
-  voice: {
-    provider: "playht",
-    voiceId: "jennifer",
-  },
-  model: {
-    provider: "openai",
-    model: "gpt-4",
-    messages: [
+  assistantId: "e3fff1dd-2e82-4cce-ac6c-8c3271eb0865"
+};
       {
         role: "system",
         content: `LegalScout is an AI-driven legal consultation platform and case marketplace that connects attorneys and clients. Clients can use LegalScout to understand their legal problem and decide if they need an attorney. Attorneys can use LegalScout to find new clients and generate leads.

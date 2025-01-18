@@ -22,8 +22,8 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
         padding: 0,
         fontFamily: "Courier, monospace",
         fontWeight: "bold",
-        fontSize: "18px",
-        background: "linear-gradient(to right, #f0f0f0, #d9d9d9, #FF7F27, #969696, #FF7F27, #525252, #FF7F27, #000000)", // Shimmer effect
+        fontSize: "28px",
+        background: "linear-gradient(to right, ##FF7F27, ##FF7F27, #FF7F27, ##FF7F27, #FF7F27, #525252, #FF7F27, #000000)", // Shimmer effect
         backgroundSize: "400% 400%",
         WebkitBackgroundClip: "text",
         WebkitTextFillColor: "transparent",

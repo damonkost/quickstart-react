@@ -6,7 +6,7 @@ import Vapi from "@vapi-ai/web";
 import { isPublicKeyMissingError } from "./utils";
 
 // Put your Vapi Public Key below.
-const vapi = new Vapi("310f0d43-27c2-47a5-a76d-e55171d024f7"); // Replace with your actual public key
+const vapi = new Vapi("YOUR_VAPI_PUBLIC_KEY"); 
 
 const App = () => {
   const [connecting, setConnecting] = useState(false);
@@ -15,51 +15,66 @@ const App = () => {
   const [assistantIsSpeaking, setAssistantIsSpeaking] = useState(false);
   const [volumeLevel, setVolumeLevel] = useState(0);
 
-  const { showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage } = usePublicKeyInvalid();
+  const { showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage } =
+    usePublicKeyInvalid();
 
   // hook into Vapi events
   useEffect(() => {
-    vapi.on("call-start", () => {
+    const handleCallStart = () => {
       setConnecting(false);
       setConnected(true);
-
       setShowPublicKeyInvalidMessage(false);
-    });
+    };
 
-    vapi.on("call-end", () => {
+    const handleCallEnd = () => {
       setConnecting(false);
       setConnected(false);
-
       setShowPublicKeyInvalidMessage(false);
-    });
+    };
 
-    vapi.on("speech-start", () => {
+    const handleSpeechStart = () => {
       setAssistantIsSpeaking(true);
-    });
+    };
 
-    vapi.on("speech-end", () => {
+    const handleSpeechEnd = () => {
       setAssistantIsSpeaking(false);
-    });
+    };
 
-    vapi.on("volume-level", (level) => {
+    const handleVolumeLevel = (level) => {
       setVolumeLevel(level);
-    });
+    };
 
-    vapi.on("error", (error) => {
-      console.error(error);
-
+    const handleError = (error) => {
+      console.error("Vapi Error:", error);
       setConnecting(false);
       if (isPublicKeyMissingError({ vapiError: error })) {
         setShowPublicKeyInvalidMessage(true);
       }
-    });
+    };
 
-    // we only want this to fire on mount
+    // Attach event listeners
+    vapi.on("call-start", handleCallStart);
+    vapi.on("call-end", handleCallEnd);
+    vapi.on("speech-start", handleSpeechStart);
+    vapi.on("speech-end", handleSpeechEnd);
+    vapi.on("volume-level", handleVolumeLevel);
+    vapi.on("error", handleError);
+
+    // Clean up event listeners on unmount
+    return () => {
+      vapi.off("call-start", handleCallStart);
+      vapi.off("call-end", handleCallEnd);
+      vapi.off("speech-start", handleSpeechStart);
+      vapi.off("speech-end", handleSpeechEnd);
+      vapi.off("volume-level", handleVolumeLevel);
+      vapi.off("error", handleError);
+    };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // call start handler
-  const startCallInline = () => {
+  const startCallInline = async () => {
     setConnecting(true);
 
     const assistantOverrides = {
@@ -68,13 +83,18 @@ const App = () => {
         model: "nova-2",
         language: "en-US",
       },
-      recordingEnabled: false, // Example override: disable recording
+      recordingEnabled: false, 
       variableValues: {
-        name: "Alice", // Example override: set a template variable
+        name: "Alice", 
       },
     };
 
-    vapi.start('e3fff1dd-2e82-4cce-ac6c-8c3271eb0865', assistantOverrides); 
+    try {
+      await vapi.start("e3fff1dd-2e82-4cce-ac6c-8c3271eb0865", assistantOverrides);
+    } catch (error) {
+      console.error("Error starting call:", error);
+      setConnecting(false);
+    }
   };
 
   const endCall = () => {
@@ -105,16 +125,18 @@ const App = () => {
         />
       )}
 
-      {showPublicKeyInvalidMessage ? <PleaseSetYourPublicKeyMessage /> : null}
+      {showPublicKeyInvalidMessage ? (
+        <PleaseSetYourPublicKeyMessage />
+      ) : null}
       <ReturnToDocsLink />
     </div>
   );
 };
 
 const usePublicKeyInvalid = () => {
-  const [showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage] = useState(false);
+  const [showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage] =
+    useState(false);
 
-  // close public key invalid message after delay
   useEffect(() => {
     if (showPublicKeyInvalidMessage) {
       setTimeout(() => {

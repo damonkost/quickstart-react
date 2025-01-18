@@ -68,7 +68,7 @@ const App = () => {
         model: "nova-2",
         language: "en-US",
       },
-      recordingEnabled: true, // Override to disable recording
+      recordingEnabled: false , // Override to disable recording
 
     };
 

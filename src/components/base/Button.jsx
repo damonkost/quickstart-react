@@ -42,7 +42,7 @@ const Button = ({ label, onClick, isLoading, disabled = false }) => {
         style={{
           backgroundColor: "transparent",
           border: "none",
-          padding: "36px",
+          padding: "10px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",

@@ -41,6 +41,8 @@ nav {
 
 .nav-links {
   display: flex; /* Make the links a flex container */
+  justify-content: center; /* Center the links horizontally */
+  width: 100%; /* Make the links container take full width */
 }
 
 .nav-links a {
@@ -78,6 +80,4 @@ nav {
   margin-bottom: 10px; 
 }
 
-.statement #root {
-  margin-top: 10px; 
-}
+.statement

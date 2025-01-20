@@ -76,13 +76,13 @@ const App = () => {
   }, []);
 
   // call start handler
-  const startCallInline = async () => { 
+  const startCallInline = async () => { 
     setConnecting(true);
 
     try {
       // Request microphone access
       await navigator.mediaDevices.getUserMedia({ audio: true });
-      setMicrophoneAllowed(true); 
+      setMicrophoneAllowed(true); 
 
       const assistantOverrides = {
         transcriber: {
@@ -90,13 +90,13 @@ const App = () => {
           model: "nova-2",
           language: "en-US",
         },
-        recordingEnabled: true, 
+        recordingEnabled: true, 
         // Add any other overrides you need here, like:
-        // endCallOnNoSpeech: false,  // Disable automatic end on no speech
-        // maxDuration: 3600,        // Set a longer max duration (in seconds) 
+        // endCallOnNoSpeech: false,  // Disable automatic end on no speech
+        // maxDuration: 3600,        // Set a longer max duration (in seconds) 
       };
 
-      vapi.start('e3fff1dd-2e82-4cce-ac6c-8c3271eb0865', assistantOverrides); 
+      vapi.start('e3fff1dd-2e82-4cce-ac6c-8c3271eb0865', assistantOverrides); 
     } catch (error) {
       console.error("Error accessing microphone:", error);
       setConnecting(false);
@@ -119,24 +119,13 @@ const App = () => {
       }}
     >
       {!connected ? (
-        <div className="statement"> 
-          <p>
-            Use our free AI to be matched with an ideal human lawyer,
-            knowledgeable about your case and eager to help.
-          </p>
-          <Button
-            label="Call Scout"
-            onClick={startCallInline}
-            isLoading={connecting}
-            disabled={!microphoneAllowed} 
-            icon={<LegalScoutIcon />} 
-          />
-          <ActiveCallDetail 
-            assistantIsSpeaking={assistantIsSpeaking}
-            volumeLevel={volumeLevel}
-            onEndCallClick={endCall}
-          />
-        </div> 
+        <Button
+          label="Call Scout"
+          onClick={startCallInline}
+          isLoading={connecting}
+          disabled={!microphoneAllowed} // Disable button if mic access is not allowed
+          icon={<LegalScoutIcon />} 
+        />
       ) : (
         <ActiveCallDetail
           assistantIsSpeaking={assistantIsSpeaking}
@@ -153,7 +142,7 @@ const App = () => {
 // Make sure the image URL is correct and accessible
 const LegalScoutIcon = () => (
   <img
-    src="https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png" 
+    src="https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png" 
     alt="LegalScout Icon"
     style={{ width: "24px", height: "24px" }}
   />

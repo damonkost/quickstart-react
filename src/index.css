@@ -46,12 +46,12 @@ header nav a:hover {
 }
 .hero {
   text-align: center;
-  padding: 300px 20px;
+  padding: 70px 20px;
   color: white;
 }
 
 .hero img {
-  max-width: 100%;
+  max-width: auto;
   height: auto;
   margin-top: 70px;
 }

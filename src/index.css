@@ -11,3 +11,38 @@ p {
   margin: 0;
   padding: 0;
 }
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #000;
+}
+
+header nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1rem;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+}
+
+.logo {
+  height: 50px;
+}
+
+.hero {
+  text-align: center;
+  padding: 50px 20px;
+  color: white;
+}
+
+.hero img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 20px;
+}

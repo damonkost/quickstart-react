@@ -19,7 +19,7 @@ const Button = ({ label, onClick, isLoading, disabled = false }) => {
     <p
       style={{
         margin: 0,
-        padding: "-20 10px",
+        padding: "0 10px",
         fontFamily: "Courier, monospace",
         fontWeight: "bold",
         fontSize: "32px",
@@ -42,7 +42,7 @@ const Button = ({ label, onClick, isLoading, disabled = false }) => {
         style={{
           backgroundColor: "transparent",
           border: "none",
-          padding: "10px",
+          padding: "-10px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",

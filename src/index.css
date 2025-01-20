@@ -19,15 +19,15 @@ header {
   flex-direction: column;
   align-items: center;
   padding: 0px 0px;
-  width: 100%; /* Add this line to make the header take full screen width */
+  width: 100%; 
 }
 
 header nav {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-bottom: 50px; 
-  background-color: #171717; 
+  margin-bottom: 50px; 
+  background-color: #171717; 
 }
 
 header nav a {
@@ -42,14 +42,14 @@ header nav a:hover {
 }
 
 .logo {
-  max-width: 100%; /* Ensures the logo never exceeds the container width */
-  height: auto;     /* Maintains aspect ratio while scaling */
-  object-fit: cover; /* Cover the container while maintaining aspect ratio */
+  max-width: 100%; 
+  height: auto;  
+  object-fit: cover; 
 }
 
 .hero {
   text-align: center;
-  padding: 70px 20px;
+  padding: 70px 20px; 
   color: white;
 }
 
@@ -60,6 +60,6 @@ header nav a:hover {
 }
 
 .statement {
-  font-size: 2em; /* Increased font size */
-  margin-bottom: 20px; /* Reduced padding between statement and button */
+  font-size: 2em; 
+  margin-bottom: 20px; 
 }

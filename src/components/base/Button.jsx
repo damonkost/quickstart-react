@@ -22,7 +22,7 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
         padding: 0,
         fontFamily: "Courier, monospace",
         fontWeight: "bold",
-        fontSize: "24px", // Reduced font size
+        fontSize: "32px", // Increased font size
         background:
           "linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #ff7f00, #0000ff, #ff7f00, #ff7f00)",
         backgroundSize: "400% 400%",
@@ -41,7 +41,7 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
       style={{
         backgroundColor: "transparent",
         border: "none",
-        padding: "16px", // Reduced padding
+        padding: "24px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -52,25 +52,25 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
     >
       <div
         style={{
-          width: "150px", // Reduced size
-          height: "150px",
+          width: "200px",
+          height: "200px",
           borderRadius: "50%",
-          background: `url('https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png')`, // Set mascot as background
+          background: `url('https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           boxShadow: "0 0 20px 10px rgba(0, 0, 100, 0.7)",
           display: "flex",
-          justifyContent: "flex-end", // Align text to the bottom
+          flexDirection: "column",
+          justifyContent: "center",
           alignItems: "center",
           transition: "all 0.3s ease",
           animation:
             "pulse 1.1s infinite, morph 3s ease-in-out infinite alternate",
-          position: "relative", // To position the pseudo-element
-          overflow: "hidden", // To clip the pseudo-element
+          position: "relative",
+          overflow: "hidden",
         }}
       >
-        {/* Pseudo-element for the emanating effect */}
-        <span 
+        <span
           style={{
             content: "''",
             position: "absolute",
@@ -80,7 +80,8 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
             width: "100%",
             height: "100%",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)",
+            background:
+              "radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)",
             animation: "emanate 2s infinite alternate",
           }}
         />

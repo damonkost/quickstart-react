@@ -83,7 +83,13 @@ nav {
 .statement #root {
   margin-top: 10px; 
 }
-.button-container {
+
+/* index.css */
+
+/* ... other styles ... */
+
+.button-container {  // Added to center the button
   display: flex;
   justify-content: center; 
+  align-items: center;  // Added to vertically center the button
 }

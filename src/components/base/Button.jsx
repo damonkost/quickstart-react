@@ -22,7 +22,7 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
         padding: 0,
         fontFamily: "Courier, monospace",
         fontWeight: "bold",
-        fontSize: "38px",
+        fontSize: "24px", // Reduced font size
         background:
           "linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #ff7f00, #0000ff, #ff7f00, #ff7f00)",
         backgroundSize: "400% 400%",
@@ -41,37 +41,50 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
       style={{
         backgroundColor: "transparent",
         border: "none",
-        padding: "24px",
+        padding: "16px", // Reduced padding
         display: "flex",
-        flexDirection: "column", // Added to stack image and text vertically
+        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
         cursor,
         opacity,
       }}
     >
-      <img
-        src="https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png"
-        alt="LegalScout Icon"
-        style={{ width: "80px", height: "80px", marginBottom: "10px" }}
-      />
-
       <div
         style={{
-          width: "300px",
-          height: "100px", // Adjusted height
+          width: "150px", // Reduced size
+          height: "150px",
           borderRadius: "50%",
-          background:
-            "radial-gradient(circle at 50% 50%, rgba(0, 0, 100, 0.8), rgba(0, 0, 50, 0.2))",
+          background: `url('https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png')`, // Set mascot as background
+          backgroundSize: "cover",
+          backgroundPosition: "center",
           boxShadow: "0 0 20px 10px rgba(0, 0, 100, 0.7)",
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "flex-end", // Align text to the bottom
           alignItems: "center",
           transition: "all 0.3s ease",
           animation:
             "pulse 1.1s infinite, morph 3s ease-in-out infinite alternate",
+          position: "relative", // To position the pseudo-element
+          overflow: "hidden", // To clip the pseudo-element
         }}
       >
+        {/* Pseudo-element for the emanating effect */}
+        <span 
+          style={{
+            content: "''",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "100%",
+            height: "100%",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)",
+            animation: "emanate 2s infinite alternate",
+          }}
+        />
+
         {Contents}
       </div>
     </button>

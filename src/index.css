@@ -59,7 +59,9 @@ header nav a:hover {
   margin-top: 70px;
 }
 
-.statement {
-  font-size: 2em; 
-  margin-bottom: 20px; 
+.statement p {
+  margin-bottom: 10px; /* Adjust as needed */
+}
+.statement #root {
+  margin-top: 10px; /* Adjust as needed */
 }

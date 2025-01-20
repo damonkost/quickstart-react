@@ -1,7 +1,7 @@
 import React from "react";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
-const Button = ({ label, onClick, isLoading, disabled }) => {
+const Button = ({ label, onClick, isLoading, disabled = false }) => { // Set disabled to false by default
   const opacity = disabled ? 0.75 : 1;
   const cursor = disabled ? "not-allowed" : "pointer";
 

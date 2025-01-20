@@ -23,7 +23,8 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
         fontFamily: "Courier, monospace",
         fontWeight: "bold",
         fontSize: "38px",
-        background: "linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #ff7f00, #0000ff, #ff7f00, #ff7f00)",
+        background:
+          "linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #ff7f00, #0000ff, #ff7f00, #ff7f00)",
         backgroundSize: "400% 400%",
         WebkitBackgroundClip: "text",
         WebkitTextFillColor: "transparent",
@@ -41,25 +42,34 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
         backgroundColor: "transparent",
         border: "none",
         padding: "24px",
-        display: "flex", // Make sure this is 'flex' or 'block' 
+        display: "flex",
+        flexDirection: "column", // Added to stack image and text vertically
         justifyContent: "center",
         alignItems: "center",
         cursor,
         opacity,
       }}
     >
+      <img
+        src="https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png"
+        alt="LegalScout Icon"
+        style={{ width: "80px", height: "80px", marginBottom: "10px" }}
+      />
+
       <div
         style={{
           width: "300px",
-          height: "300px",
-          borderRadius: "50%", 
-          background: "radial-gradient(circle at 50% 50%, rgba(0, 0, 100, 0.8), rgba(0, 0, 50, 0.2))", 
-          boxShadow: "0 0 20px 10px rgba(0, 0, 100, 0.7)", 
+          height: "100px", // Adjusted height
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle at 50% 50%, rgba(0, 0, 100, 0.8), rgba(0, 0, 50, 0.2))",
+          boxShadow: "0 0 20px 10px rgba(0, 0, 100, 0.7)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           transition: "all 0.3s ease",
-          animation: "pulse 1.1s infinite, morph 3s ease-in-out infinite alternate",
+          animation:
+            "pulse 1.1s infinite, morph 3s ease-in-out infinite alternate",
         }}
       >
         {Contents}

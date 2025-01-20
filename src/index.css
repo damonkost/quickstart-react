@@ -3,8 +3,8 @@
 body {
   margin: 0;
   background-color: #000000;
-  font-family: "Inter", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-    "Helvetica Neue", sans-serif;
+  font-family: "Inter", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -16,8 +16,8 @@ p {
 
 header {
   display: flex;
-  flex-direction: column; /* Stack nav and logo vertically */
-  align-items: center;      /* Center horizontally */
+  flex-direction: column;
+  align-items: center;
   padding: 10px 20px;
   background-color: #000;
 }
@@ -26,7 +26,7 @@ header nav {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-bottom: 10px; /* Add spacing between nav and logo */
+  margin-bottom: 20px; /* Increased spacing */
 }
 
 header nav a {
@@ -54,4 +54,8 @@ header nav a:hover {
   max-width: 100%;
   height: auto;
   margin-top: 20px;
+}
+
+.statement {
+  font-size: 2em; /* Increased font size */
 }

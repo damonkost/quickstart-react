@@ -42,9 +42,9 @@ const Button = ({ label, onClick, isLoading, disabled = false }) => {
         style={{
           backgroundColor: "transparent",
           border: "none",
-          padding: "-10px",
-          display: "block", // Added to center the button
-          margin: "0 auto", // Added to center the button
+          padding: "-10px", 
+          display: "block",  // Ensures the button is a block-level element
+          margin: "0 auto",  // Centers the button horizontally
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",

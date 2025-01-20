@@ -19,7 +19,7 @@ const Button = ({ label, onClick, isLoading, disabled = false }) => {
     <p
       style={{
         margin: 0,
-        padding: "0 10px",
+        padding: "-20 10px",
         fontFamily: "Courier, monospace",
         fontWeight: "bold",
         fontSize: "32px",

@@ -26,8 +26,8 @@ header nav {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-bottom: 50px; 
-  background-color: #171717; 
+  margin-bottom: 50px; 
+  background-color: #171717; 
 }
 
 header nav a {
@@ -40,10 +40,13 @@ header nav a {
 header nav a:hover {
   text-decoration: underline;
 }
+
 .logo {
   max-width: 100%; /* Ensures the logo never exceeds the container width */
-  height: auto;     /* Maintains aspect ratio while scaling */
+  height: auto;     /* Maintains aspect ratio while scaling */
+  object-fit: cover; /* Cover the container while maintaining aspect ratio */
 }
+
 .hero {
   text-align: center;
   padding: 70px 20px;
@@ -58,4 +61,5 @@ header nav a:hover {
 
 .statement {
   font-size: 2em; /* Increased font size */
+  margin-bottom: 20px; /* Reduced padding between statement and button */
 }

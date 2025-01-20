@@ -45,9 +45,7 @@ const Button = ({ label, onClick, isLoading, disabled = false }) => {
           padding: "0px",
           display: "block", // Ensures the button is a block-level element
           margin: "0 auto", // Centers the button horizontally
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
+          
           cursor,
           opacity,
           transition: "all 0.3s ease",

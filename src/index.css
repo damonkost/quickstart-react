@@ -80,4 +80,6 @@ nav {
   margin-bottom: 10px; 
 }
 
-.statement
+.statement #root {
+  margin-top: 10px; 
+}

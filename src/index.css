@@ -39,11 +39,10 @@ header nav a {
 header nav a:hover {
   text-decoration: underline;
 }
-
 .logo {
-  height: 50px;
+  max-width: 100%; /* Ensures the logo never exceeds the container width */
+  height: auto;     /* Maintains aspect ratio while scaling */
 }
-
 .hero {
   text-align: center;
   padding: 300px 20px;

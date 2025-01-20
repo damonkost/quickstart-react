@@ -22,7 +22,7 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
         padding: 0,
         fontFamily: "Courier, monospace",
         fontWeight: "bold",
-        fontSize: "32px", // Increased font size
+        fontSize: "32px",
         background:
           "linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #ff7f00, #0000ff, #ff7f00, #ff7f00)",
         backgroundSize: "400% 400%",
@@ -41,7 +41,7 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
       style={{
         backgroundColor: "transparent",
         border: "none",
-        padding: "24px",
+        padding: "36px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -52,16 +52,16 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
     >
       <div
         style={{
-          width: "200px",
-          height: "200px",
+          width: "300px",
+          height: "300px",
           borderRadius: "50%",
           background: `url('https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           boxShadow: "0 0 20px 10px rgba(0, 0, 100, 0.7)",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
+          flexDirection: "column", // Stack mascot and text vertically
+          justifyContent: "flex-end", // Align text to the bottom
           alignItems: "center",
           transition: "all 0.3s ease",
           animation:

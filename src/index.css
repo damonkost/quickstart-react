@@ -1,61 +1,61 @@
 /* index.css */
 
 body {
-  margin: 0;
-  background-color: #000000;
-  font-family: "Inter", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  background-color: #000000;
+  font-family: "Inter", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 p {
-  margin: 0;
-  padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px 70px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 70px;
 }
 
 header nav {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin-bottom: 20px; /* Increased spacing */
-  background-color: #171717; /* Moved background color here */
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px; /* Increased spacing */
+  background-color: #171717; /* Background color for the nav */
 }
 
 header nav a {
-  color: white;
-  text-decoration: none;
-  margin: 0 15px;
-  font-size: 1rem;
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1rem;
 }
 
 header nav a:hover {
-  text-decoration: underline;
+  text-decoration: underline;
 }
 
 .logo {
-  height: 50px;
+  height: 50px;
 }
 
 .hero {
-  text-align: center;
-  padding: 300px 20px;
-  color: white;
+  text-align: center;
+  padding: 300px 20px;
+  color: white;
 }
 
 .hero img {
-  max-width: 100%;
-  height: auto;
-  margin-top: 70px;
+  max-width: 100%;
+  height: auto;
+  margin-top: 70px;
 }
 
 .statement {
-  font-size: 2em; /* Increased font size */
+  font-size: 2em; /* Increased font size */
 }

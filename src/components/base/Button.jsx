@@ -19,7 +19,7 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
     <p
       style={{
         margin: 0,
-        padding: 0,
+        padding: "0 10px", // Added horizontal padding
         fontFamily: "Courier, monospace",
         fontWeight: "bold",
         fontSize: "32px",
@@ -60,14 +60,14 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
           backgroundPosition: "center",
           boxShadow: "0 0 20px 10px rgba(0, 0, 100, 0.7)",
           display: "flex",
-          flexDirection: "column", // Stack mascot and text vertically
-          justifyContent: "flex-end", // Align text to the bottom
+          flexDirection: "column",
+          justifyContent: "flex-end",
           alignItems: "center",
           transition: "all 0.3s ease",
           animation:
             "pulse 1.1s infinite, morph 3s ease-in-out infinite alternate",
           position: "relative",
-          overflow: "hidden",
+          // overflow: "hidden",
         }}
       >
         <span

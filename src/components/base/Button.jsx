@@ -41,7 +41,7 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
         backgroundColor: "transparent",
         border: "none",
         padding: "24px",
-        display: "flex",
+        display: "flex", // Make sure this is 'flex' or 'block' 
         justifyContent: "center",
         alignItems: "center",
         cursor,
@@ -52,9 +52,9 @@ const Button = ({ label, onClick, isLoading, disabled }) => {
         style={{
           width: "300px",
           height: "300px",
-          borderRadius: "50%", // Make it a circle
-          background: "radial-gradient(circle at 50% 50%, rgba(0, 0, 100, 0.8), rgba(0, 0, 50, 0.2))", // Dark blue transparent gradient
-          boxShadow: "0 0 20px 10px rgba(0, 0, 100, 0.7)", // Dark blue shadow
+          borderRadius: "50%", 
+          background: "radial-gradient(circle at 50% 50%, rgba(0, 0, 100, 0.8), rgba(0, 0, 50, 0.2))", 
+          boxShadow: "0 0 20px 10px rgba(0, 0, 100, 0.7)", 
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

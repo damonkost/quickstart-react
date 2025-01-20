@@ -14,10 +14,16 @@ p {
 
 header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Align logo and nav to opposite ends */
   align-items: center;
   padding: 10px 20px;
-  background-color: #000;
+  background-color: #000; /* Black background */
+}
+
+header nav {
+  display: flex;  /* Make nav a flex container */
+  justify-content: center; /* Center the links horizontally */
+  width: 100%; /* Make nav take full width */
 }
 
 header nav a {

@@ -72,12 +72,35 @@ nav {
 }
 
 .statement {
-  font-size: 2em; 
-  margin-bottom: 20px; 
+  font-size: 1.5em;  /* Adjust font size as needed */
+  text-align: center;  
+  margin: 30px auto;    
+  width: 80%;          
 }
 
 .statement p {
-  margin-bottom: 10px; 
+  display: flex;
+  flex-direction: column; /* Arrange lines vertically */
+  align-items: center;   /* Center each line horizontally */
+}
+
+/* Add more specific styles for each line if needed */
+.statement p span:nth-child(1) { 
+  /* Styles for the first line */ 
+}
+
+.statement p span:nth-child(2) { 
+  /* Styles for the second line */
+}
+
+.statement p span:nth-child(3) { 
+  /* Styles for the third line */
+}
+
+.button-container {  
+  display: flex;
+  justify-content: center; 
+  align-items: center;  
 }
 
 .statement #root {

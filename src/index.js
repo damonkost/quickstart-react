@@ -5,7 +5,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 // Render application
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("react-button"));
 
 root.render(
   <React.StrictMode>

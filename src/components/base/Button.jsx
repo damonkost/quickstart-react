@@ -13,7 +13,7 @@ const Button = ({ label, onClick, isLoading, disabled = false }) => {
       margin={0.5}
       loading={true}
       size={50}
-      css={{ display: "block", margin: "0 auto" }}
+      css={{ display: "block", margin: "-50 auto" }}
     />
   ) : (
     <p

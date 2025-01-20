@@ -1,3 +1,5 @@
+/* index.css */
+
 body {
   margin: 0;
   background-color: #000000;
@@ -14,22 +16,23 @@ p {
 
 header {
   display: flex;
-  justify-content: space-between; /* Align logo and nav to opposite ends */
-  align-items: center;
+  flex-direction: column; /* Stack nav and logo vertically */
+  align-items: center;      /* Center horizontally */
   padding: 10px 20px;
-  background-color: #000; /* Black background */
+  background-color: #000;
 }
 
 header nav {
-  display: flex;  /* Make nav a flex container */
-  justify-content: center; /* Center the links horizontally */
-  width: 100%; /* Make nav take full width */
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 10px; /* Add spacing between nav and logo */
 }
 
 header nav a {
   color: white;
   text-decoration: none;
-  margin: 0 5px;
+  margin: 0 15px;
   font-size: 1rem;
 }
 
@@ -38,7 +41,7 @@ header nav a:hover {
 }
 
 .logo {
-  height: 5px;
+  height: 50px;
 }
 
 .hero {
@@ -50,5 +53,5 @@ header nav a:hover {
 .hero img {
   max-width: 100%;
   height: auto;
-  margin-top: 10px;
+  margin-top: 20px;
 }

@@ -25,7 +25,7 @@ const Button = ({ label, onClick, isLoading, disabled = false }) => {
         fontSize: "32px",
         background:
           "linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #ff7f00, #0000ff, #ff7f00, #ff7f00)",
-        backgroundSize: "400% 400%",
+        backgroundSize: "200% 200%",
         WebkitBackgroundClip: "text",
         WebkitTextFillColor: "transparent",
         animation: "shimmer 2s linear infinite",
@@ -61,7 +61,7 @@ const Button = ({ label, onClick, isLoading, disabled = false }) => {
             background: `url('https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            boxShadow: "0 0 20px 10px rgba(0, 0, 100, 0.7)",
+            boxShadow: "0 0 40px 10px rgba(0, 0, 100, 0.7)",
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-end",
@@ -75,7 +75,7 @@ const Button = ({ label, onClick, isLoading, disabled = false }) => {
             style={{
               content: "''",
               position: "absolute",
-              top: "50%",
+              top: "100%",
               left: "50%",
               transform: "translate(-50%, -50%)",
               width: "100%",

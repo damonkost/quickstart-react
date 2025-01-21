@@ -6,7 +6,7 @@ import Vapi from "@vapi-ai/web";
 import { isPublicKeyMissingError } from "./utils";
 
 // Put your Vapi Public Key below.
-const vapi = new Vapi("YOUR_VAPI_PUBLIC_KEY"); // Replace with your actual public key
+const vapi = new Vapi("310f0d43-27c2-47a5-a76d-e55171d024f7"); // Replace with your actual public key
 
 const App = () => {
   const [connecting, setConnecting] = useState(false);
@@ -14,10 +14,9 @@ const App = () => {
 
   const [assistantIsSpeaking, setAssistantIsSpeaking] = useState(false);
   const [volumeLevel, setVolumeLevel] = useState(0);
-  const [microphoneAllowed, setMicrophoneAllowed] = useState(false);
+  const [microphoneAllowed, setMicrophoneAllowed] = useState(false); // Add state for microphone permission
 
-  const { showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage } =
-    usePublicKeyInvalid();
+  const { showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage } = usePublicKeyInvalid();
 
   // hook into Vapi events
   useEffect(() => {
@@ -56,6 +55,7 @@ const App = () => {
       }
     };
 
+    // Add event listeners
     vapi.on("call-start", handleCallStart);
     vapi.on("call-end", handleCallEnd);
     vapi.on("speech-start", handleSpeechStart);
@@ -63,6 +63,7 @@ const App = () => {
     vapi.on("volume-level", handleVolumeLevel);
     vapi.on("error", handleError);
 
+    // Clean up event listeners on unmount
     return () => {
       vapi.off("call-start", handleCallStart);
       vapi.off("call-end", handleCallEnd);
@@ -72,14 +73,16 @@ const App = () => {
       vapi.off("error", handleError);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },);
+  }, []);
 
-  const startCallInline = async () => {
+  // call start handler
+  const startCallInline = async () => { 
     setConnecting(true);
 
     try {
+      // Request microphone access
       await navigator.mediaDevices.getUserMedia({ audio: true });
-      setMicrophoneAllowed(true);
+      setMicrophoneAllowed(true); 
 
       const assistantOverrides = {
         transcriber: {
@@ -87,13 +90,17 @@ const App = () => {
           model: "nova-2",
           language: "en-US",
         },
-        recordingEnabled: true,
+        recordingEnabled: true, 
+        // Add any other overrides you need here, like:
+        // endCallOnNoSpeech: false,  // Disable automatic end on no speech
+        // maxDuration: 3600,        // Set a longer max duration (in seconds) 
       };
 
-      vapi.start("e3fff1dd-2e82-4cce-ac6c-8c3271eb0865", assistantOverrides);
+      vapi.start('e3fff1dd-2e82-4cce-ac6c-8c3271eb0865', assistantOverrides); 
     } catch (error) {
       console.error("Error accessing microphone:", error);
       setConnecting(false);
+      // Handle microphone access errors (e.g., display an error message)
     }
   };
 
@@ -111,59 +118,68 @@ const App = () => {
         alignItems: "center",
       }}
     >
-      {connected ? ( // Show call-related components only when connected
-        <div> 
-          <ActiveCallDetail
-            assistantIsSpeaking={assistantIsSpeaking}
-            volumeLevel={volumeLevel}
-            onEndCallClick={endCall}
-          />
-        </div>
+      {!connected ? (
+        <Button
+          label="Call Scout"
+          onClick={startCallInline}
+          isLoading={connecting}
+          disabled={!microphoneAllowed} // Disable button if mic access is not allowed
+          icon={<LegalScoutIcon />} 
+        />
       ) : (
-        <div> {/* Show other content only when not connected */}
-          <header>
-            <nav>
-              <div className="logo-container">
-                <img
-                  className="logo"
-                  src="https://res.cloudinary.com/glide/image/fetch/f_auto,c_limit/https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fglide-prod.appspot.com%2Fo%2Ficon-images%252Fanonymous-4ec86c98-f143-4160-851d-892f167b223c.png%3Falt%3Dmedia%26token%3Dcdc26513-26ae-48f6-b085-85b8bb806c4c"
-                  alt="LegalScout Logo"
-                />
-              </div>
-              <div className="nav-links">
-                <a href="https://legalscout.ai/dl/Home">Home</a>
-                <a href="https://legalscout.ai/dl/Cases">My Cases</a>
-                <a href="https://legalscout.ai/dl/About">About</a>
-              </div>
-            </nav>
-          </header>
-
-          <main className="hero">
-            <div className="statement">
-              <p>
-                <span>Use our free AI to be matched</span>
-                <span>with an ideal human lawyer,</span>
-                <span>knowledgeable about your case and eager to help.</span>
-              </p>
-              <Button
-                label="Call Scout"
-                onClick={startCallInline}
-                isLoading={connecting}
-                disabled={!microphoneAllowed}
-                icon={<LegalScoutIcon />}
-              />
-            </div>
-          </main>
-
-          {showPublicKeyInvalidMessage ? (
-            <PleaseSetYourPublicKeyMessage />
-          ) : null}
-        </div>
+        <ActiveCallDetail
+          assistantIsSpeaking={assistantIsSpeaking}
+          volumeLevel={volumeLevel}
+          onEndCallClick={endCall}
+        />
       )}
+
+      {showPublicKeyInvalidMessage ? <PleaseSetYourPublicKeyMessage /> : null}
     </div>
   );
 };
 
-// ... rest of your App.jsx code (LegalScoutIcon, usePublicKeyInvalid, PleaseSetYourPublicKeyMessage) ...
+// Make sure the image URL is correct and accessible
+const LegalScoutIcon = () => (
+  <img
+    src="https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png" 
+    alt="LegalScout Icon"
+    style={{ width: "24px", height: "24px" }}
+  />
+);
+
+const usePublicKeyInvalid = () => {
+  const [showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage] = useState(false);
+
+  // close public key invalid message after delay
+  useEffect(() => {
+    if (showPublicKeyInvalidMessage) {
+      setTimeout(() => {
+        setShowPublicKeyInvalidMessage(false);
+      }, 3000);
+    }
+  }, [showPublicKeyInvalidMessage]);
+
+  return {
+    showPublicKeyInvalidMessage,
+    setShowPublicKeyInvalidMessage,
+  };
+};
+
+const PleaseSetYourPublicKeyMessage = () => {
+  return (
+    <div
+     style={{
+    display: "flex",
+    width: "100vw",
+    height: "100vh",
+    justifyContent: "center", // This centers horizontally
+    alignItems: "center",     // This centers vertically
+  }}
+    >
+      Is your Vapi Public Key missing? (recheck your code)
+    </div>
+  );
+};
 
 export default App;

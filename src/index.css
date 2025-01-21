@@ -83,7 +83,7 @@ nav {
   text-align: center; 
   margin: 30px auto;  
   margin-top: 20px; 
-margin-bottom: -150px;
+margin-bottom: -350px;
   width: 80%;        
   display: flex;           /* Make the statement a flex container */
   flex-direction: column;  /* Align items vertically */

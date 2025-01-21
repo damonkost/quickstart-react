@@ -55,7 +55,7 @@ nav {
 .nav-links a {
   color: white;
   text-decoration: none;
-  margin-left: 20px; /* Spacing between links */
+  margin-left: 15px; /* Spacing between links */
   font-size: 1rem;
   padding: 8px 15px; /* Add padding to the links */
   border-radius: 20px; /* Rounded corners for the button style */
@@ -81,7 +81,8 @@ nav {
 .statement {
   font-size: 1.5em;  /* Adjust font size as needed */
   text-align: center;  
-  margin: 30px auto;    
+  margin: 30px auto;  
+margin-top: 20px;  
   width: 70%;          
 }
 

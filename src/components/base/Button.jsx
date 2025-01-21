@@ -28,6 +28,7 @@ const Button = ({ label, onClick, isLoading, disabled = false }) => {
         backgroundSize: "200% 200%",
         WebkitBackgroundClip: "text",
         WebkitTextFillColor: "transparent",
+animation: "ripple 2s infinite", // Added animation
         animation: "shimmer 2s linear infinite",
       }}
     >

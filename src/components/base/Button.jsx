@@ -3,10 +3,8 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 
 const Button = ({ label, onClick, isLoading, disabled = false }) => {
   const opacity = disabled ? 0.75 : 1;
-  const cursor = disabled ? : "pointer";
+  const cursor = disabled ? "not-allowed" : "pointer";
 
-  const handleCheckboxChange = () => {
-    setAgreedToTerms(!agreedToTerms);
   const Contents = isLoading ? (
     <ScaleLoader
       color="#000"
@@ -39,20 +37,7 @@ animation: "ripple 2s infinite", // Added animation
   );
 
   return (
-     <div className="button-container">
-      <div className="terms-checkbox"> {/* Added checkbox container */}
-        <input
-          type="checkbox"
-          id="terms"
-          checked={agreedToTerms}
-          onChange={handleCheckboxChange}
-        />
-        <label htmlFor="terms">I agree to the Terms and Conditions</label>
-      </div>
-      <button
-        onClick={onClick}
-        disabled={disabled || !agreedToTerms} // Disable if disabled or terms not agreed
-        style={{
+    <div className="button-container">
       <button
         onClick={onClick}
         style={{
@@ -68,21 +53,22 @@ animation: "ripple 2s infinite", // Added animation
         }}
       >
         <div
-           style={{
-    width: "300px",
-    height: "300px",
-    borderRadius: "50%",
-    background: `url('https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png')`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    boxShadow: "0 0 40px 10px rgba(0, 0, 100, 0.7)",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center", // Center the button content vertically
-    alignItems: "center",
-    animation: "ripple 2s infinite, pulse 1.1s infinite, morph 3s ease-in-out infinite alternate", // Add the ripple animation here
-    position: "relative",
-  }}
+          style={{
+            width: "300px",
+            height: "300px",
+            borderRadius: "50%",
+            background: `url('https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center", // Ensured background image is centered
+            boxShadow: "0 0 40px 10px rgba(0, 0, 100, 0.7)",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-end",
+            alignItems: "center",
+            animation:
+              "pulse 1.1s infinite, morph 3s ease-in-out infinite alternate",
+            position: "relative",
+          }}
         >
           <span
             style={{

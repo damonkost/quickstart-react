@@ -39,7 +39,20 @@ animation: "ripple 2s infinite", // Added animation
   );
 
   return (
-    <div className="button-container">
+     <div className="button-container">
+      <div className="terms-checkbox"> {/* Added checkbox container */}
+        <input
+          type="checkbox"
+          id="terms"
+          checked={agreedToTerms}
+          onChange={handleCheckboxChange}
+        />
+        <label htmlFor="terms">I agree to the Terms and Conditions</label>
+      </div>
+      <button
+        onClick={onClick}
+        disabled={disabled || !agreedToTerms} // Disable if disabled or terms not agreed
+        style={{
       <button
         onClick={onClick}
         style={{

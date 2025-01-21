@@ -53,22 +53,21 @@ animation: "ripple 2s infinite", // Added animation
         }}
       >
         <div
-          style={{
-            width: "300px",
-            height: "300px",
-            borderRadius: "50%",
-            background: `url('https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center", // Ensured background image is centered
-            boxShadow: "0 0 40px 10px rgba(0, 0, 100, 0.7)",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-end",
-            alignItems: "center",
-            animation:
-              "pulse 1.1s infinite, morph 3s ease-in-out infinite alternate",
-            position: "relative",
-          }}
+           style={{
+    width: "300px",
+    height: "300px",
+    borderRadius: "50%",
+    background: `url('https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png')`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    boxShadow: "0 0 40px 10px rgba(0, 0, 100, 0.7)",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center", // Center the button content vertically
+    alignItems: "center",
+    animation: "ripple 2s infinite, pulse 1.1s infinite, morph 3s ease-in-out infinite alternate", // Add the ripple animation here
+    position: "relative",
+  }}
         >
           <span
             style={{

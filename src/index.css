@@ -109,10 +109,16 @@ margin-bottom: -350px;
   /* Styles for the third line */
 }
 
-.button-container {  
+.button-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Align checkbox and button vertically */
+}
 
-  align-items: center;  
+.terms-checkbox { /* Style the checkbox container */
+  margin-bottom: 10px; /* Add spacing between checkbox and button */
+  color: white; /* Set text color to white */
 }
 
 .statement #root {

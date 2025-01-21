@@ -1,6 +1,6 @@
 import React from "react";
 
-const AssistantSpeechIndicator = ({ isSpeaking }) => {
+const AssistantSpeechIndicator = ({ isSpeaking }) => { 
   return (
     <div style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
       <div

@@ -83,7 +83,7 @@ nav {
   text-align: center; 
   margin: 30px auto;  
   margin-top: 20px; 
-margin-bottom: 0px;
+  margin-bottom: 10px; /* Reduce bottom margin */
   width: 80%;        
   display: flex;           /* Make the statement a flex container */
   flex-direction: column;  /* Align items vertically */
@@ -111,8 +111,9 @@ margin-bottom: 0px;
 
 .button-container {  
   display: flex;
-
-  align-items: center;  
+  justify-content: center; 
+  align-items: center;   
+  margin-top: 10px; /* Adjust top margin */
 }
 
 .statement #root {

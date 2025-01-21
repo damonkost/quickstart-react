@@ -3,7 +3,6 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 
 const Button = ({ label, onClick, isLoading, disabled = false }) => {
   const opacity = disabled ? 0.75 : 1;
-  const cursor = disabled ? : "pointer";
 
   const Contents = isLoading ? (
     <ScaleLoader

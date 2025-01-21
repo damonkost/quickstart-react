@@ -119,8 +119,9 @@ margin-top: 200px;
 
 /* ... other styles ... */
 
-.button-container {  
+.button-container { 
   display: flex;
+  justify-content: center; /* Add this to center horizontally */
+  align-items: center;   
 
-  align-items: center;  
 }

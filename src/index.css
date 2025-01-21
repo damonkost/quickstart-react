@@ -33,7 +33,7 @@ nav {
   display: flex; /* Make the nav a flex container */
   align-items: center; /* Vertically align items */
   width: 100%;
-  background-color: #171717; 
+  /* background-color: #171717;  Remove background color from nav */ 
   padding: 15px 20px; /* Add padding for height */
 }
 

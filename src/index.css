@@ -79,11 +79,13 @@ nav {
 }
 
 .statement {
-  font-size: 1.5em;  /* Adjust font size as needed */
-  text-align: center;  
-  margin: 30px auto;  
-margin-top: 200px;  
-  width: 70%;          
+  font-size: 1.5em; 
+  text-align: center; 
+  margin: 30px auto;   
+  width: 80%;        
+  display: flex;           /* Make the statement a flex container */
+  flex-direction: column;  /* Align items vertically */
+  align-items: center;    /* Center items horizontally */
 }
 
 .statement p {

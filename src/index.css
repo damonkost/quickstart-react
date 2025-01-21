@@ -134,3 +134,174 @@ nav {
     box-shadow: 0 0 40px 10px rgba(0, 0, 100, 0.7);
   }
 }
+/* index.css */
+
+body {
+  margin: 0;
+  background-color: #000000;
+  font-family: "Inter", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 0px;
+  width: 100%; 
+  position: fixed; /* Keep the header in view */
+  top: 0;         /* Position it at the top */
+  left: 0;        /* Position it at the left */
+  width: 100%;    /* Make it span the full width */
+  z-index: 100;    /* Ensure it's on top of other elements */
+  background-color: #171717; 
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 15px 20px; 
+}
+
+.logo-container {
+  margin-right: auto;
+}
+
+.logo {
+  max-width: 150px;
+  height: auto;
+}
+
+.nav-links {
+  display: flex; 
+  justify-content: center; 
+  width: 100%; 
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin-left: 15px; 
+  font-size: 1rem;
+  padding: 8px 15px; 
+  border-radius: 20px; 
+  transition: background-color 0.3s ease; 
+}
+
+.nav-links a:hover {
+  background-color: #333; 
+}
+
+.hero {
+  text-align: center;
+  padding: 70px 10px 10px 10px; /* Adjusted padding */
+  color: white;
+}
+
+.hero img {
+  max-width: auto;
+  height: auto;
+  margin-top: 20px;
+}
+
+.statement {
+  font-size: 1.5em; 
+  text-align: center;  
+  margin: 30px auto;    
+  margin-top: 20px;
+  margin-bottom: -350px;
+  width: 80%;           
+  display: flex;           
+  flex-direction: column; 
+  align-items: center;   
+}
+
+.statement p {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;   
+}
+
+/* Add more specific styles for each line if needed */
+.statement p span:nth-child(1) { 
+  /* Styles for the first line */ 
+}
+
+.statement p span:nth-child(2) { 
+  /* Styles for the second line */
+}
+
+.statement p span:nth-child(3) { 
+  /* Styles for the third line */
+}
+
+.button-container {  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Align checkbox and button vertically */
+}
+
+.terms-checkbox {
+  margin-bottom: 10px;
+  color: white;
+}
+
+.statement #root {
+  margin-top: 10px; 
+}
+
+@keyframes ripple {
+  0% {
+    box-shadow: 0 0 40px 10px rgba(0, 0, 100, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 60px 20px rgba(0, 0, 100, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 40px 10px rgba(0, 0, 100, 0.7);
+  }
+}
+/* Previous CSS styles remain the same */
+
+.gradient-text {
+  background: linear-gradient(to right, #f39c12, #e74c3c, #9b59b6); 
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 3em;
+}
+
+.pulse-button {
+  background-color: #2ecc71; /* Example green color */
+  color: white;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.4);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { 
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}

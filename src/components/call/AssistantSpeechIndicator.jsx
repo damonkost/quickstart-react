@@ -2,7 +2,14 @@ import React from "react";
 
 const AssistantSpeechIndicator = ({ isSpeaking }) => {
   return (
-    <div style={{ display: "flex", alignItems: "center", marginBottom: "10px", visibility: isSpeaking ? "visible" : "hidden"}}> 
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        marginBottom: "10px",
+        visibility: isSpeaking ? "visible" : "hidden",
+      }}
+    >
       <div
         style={{
           width: "20px",
@@ -13,7 +20,7 @@ const AssistantSpeechIndicator = ({ isSpeaking }) => {
         }}
       />
       <p style={{ color: "white", margin: 0 }}>
-        {isSpeaking ? "Barking" : "Listening"} 
+        {isSpeaking ? "Barking" : "Listening"}
       </p>
     </div>
   );

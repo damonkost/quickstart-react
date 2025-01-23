@@ -1,10 +1,12 @@
 {
     "configurations": [
+        
         {
             "type": "chrome",
-            "name": "https://scout.legalscout.net/",
+            "name": "Launch LegalScout",
             "request": "launch",
-            "url": "https://scout.legalscout.net/"
+            "url": "https://scout.legalscout.net/",
+            "webRoot": "${workspaceFolder}"
         }
     ]
 }

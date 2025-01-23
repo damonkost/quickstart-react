@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "chrome",
+            "name": "https://scout.legalscout.net/",
+            "request": "launch",
+            "url": "https://scout.legalscout.net/"
+        }
+    ]
+}

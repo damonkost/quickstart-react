@@ -40,13 +40,13 @@ module.exports = async function (context, req) {
         // Return a success message
         context.res = {
             status: 200,
-            body: "Attorney data updated successfully!"
+            body: JSON.stringify({ message: "Attorney data updated successfully!" })
         };
     } catch (error) {
         // Handle any errors that occur during the process
         context.res = {
             status: 500,
-            body: `Error updating attorney data: ${error.message}`
+            body: JSON.stringify({ error: `Error updating attorney data: ${error.message}` })
         };
     }
 };

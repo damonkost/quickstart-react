@@ -1,11 +1,14 @@
 {
+    "version": "0.2.0",
     "configurations": [
         {
             "type": "chrome",
-            "name": "Launch LegalScout",
             "request": "launch",
+            "name": "Launch LegalScout",
             "url": "https://scout.legalscout.net/",
-            "webRoot": "${workspaceFolder}"
+            "webRoot": "${workspaceFolder}",
+            "sourceMaps": true,
+            "trace": true,
         }
     ]
 }

@@ -95,17 +95,11 @@ nav {
 }
 
 /* Add more specific styles for each line if needed */
-.statement p span:nth-child(1) { 
-  /* Styles for the first line */ 
-}
+/* Styles for the first line can be added here if needed */
 
-.statement p span:nth-child(2) { 
-  /* Styles for the second line */
-}
+/* Styles for the second line can be added here if needed */
 
-.statement p span:nth-child(3) { 
-  /* Styles for the third line */
-}
+/* Styles for the third line can be added here if needed */
 
 .button-container {  
   display: flex;

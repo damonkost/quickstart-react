@@ -39,9 +39,15 @@ async function updateTable() {
 
 module.exports = async (req, res) => {
     try {
-        console.log('Received request:', req.body);
+        console.log('Received webhook request:', req.body);
         // Parse the JSON payload from the webhook request
         const payload = req.body;
+
+        // Add validation for webhook source
+        const webhookUrl = 'https://hook.us1.make.com/xovnaaoshufg71xjnx7h6blgdv1l2mwl';
+        if (req.headers['x-webhook-source'] !== webhookUrl) {
+            throw new Error('Invalid webhook source');
+        }
 
         // Extract the relevant attorney data from the payload
         const { subdomain, logoUrl, mascotUrl, vapiUrl, firmName, vapiInstructions, vapiContext, interactionDepositUrl } = payload;
@@ -83,8 +89,8 @@ module.exports = async (req, res) => {
         // Return a success message
         res.status(200).json({ message: "Attorney data updated successfully!" });
     } catch (error) {
-        console.error('Error updating attorney data:', error);
+        console.error('Webhook processing error:', error);
         // Handle any errors that occur during the process
-        res.status(500).json({ error: `Error updating attorney data: ${error.message}` });
+        res.status(500).json({ error: `Error processing webhook: ${error.message}` });
     }
 };

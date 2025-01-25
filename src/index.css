@@ -65,7 +65,7 @@ nav {
 .hero {
   text-align: center;
   padding: 70px 10px 10px 10px; /* Adjusted padding */
-  color: white;
+  color: #333; /* Ensure text color is set */
 }
 
 .hero img {

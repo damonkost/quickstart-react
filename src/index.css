@@ -112,6 +112,7 @@ nav {
 
 #app {
   padding: 20px; /* Add some padding to the root element */
+  margin-top: 100px; /* Add margin to avoid overlap with fixed header */
 }
 
 /* index.css */

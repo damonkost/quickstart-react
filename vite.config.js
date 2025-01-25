@@ -1,25 +1,21 @@
 import { defineConfig } from 'vite';
-import reactRefresh from '@vitejs/plugin-react-refresh';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  plugins: [reactRefresh()],
+  plugins: [react()],
   build: {
     outDir: 'dist',
-    sourcemap: true,
+    sourcemap: false, // Disable source maps in production
     rollupOptions: {
-      input: {
-        main: './index.html'
-      },
       output: {
-        dir: './dist',
-        entryFileNames: 'assets/[name].[hash].js',
-        chunkFileNames: 'assets/[name].[hash].js',
-        assetFileNames: 'assets/[name].[hash].[ext]'
+        entryFileNames: '[name].[hash].js',
+        chunkFileNames: '[name].[hash].js',
+        assetFileNames: '[name].[hash].[ext]'
       }
     }
   },
   server: {
-    port: 3000
-  },
-  base: './'
+    port: 3000,
+    host: true
+  }
 });

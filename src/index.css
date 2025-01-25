@@ -22,7 +22,6 @@ header {
   position: fixed; /* Keep the header in view */
   top: 0;         /* Position it at the top */
   left: 0;        /* Position it at the left */
-  /* width: 100%;    Make it span the full width */
   z-index: 100;    /* Ensure it's on top of other elements */
   background-color: #171717; /* Add background color to the header */
 }
@@ -31,7 +30,6 @@ nav {
   display: flex; /* Make the nav a flex container */
   align-items: center; /* Vertically align items */
   width: 100%;
-  /* background-color: #171717;  Remove background color from nav */ 
   padding: 15px 20px; /* Add padding for height */
 }
 

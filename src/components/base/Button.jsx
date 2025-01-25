@@ -1,9 +1,10 @@
 import React from "react";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
-const Button = ({ label, onClick, isLoading, disabled = false }) => {
+const Button = ({ label, onClick, isLoading, disabled = false, logoUrl }) => {
   const opacity = disabled ? 0.75 : 1;
   const cursor = disabled ? "not-allowed" : "pointer";
+  const defaultLogoUrl = "https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png";
 
   const Contents = isLoading ? (
     <ScaleLoader
@@ -28,7 +29,6 @@ const Button = ({ label, onClick, isLoading, disabled = false }) => {
         backgroundSize: "200% 200%",
         WebkitBackgroundClip: "text",
         WebkitTextFillColor: "transparent",
-animation: "ripple 2s infinite", // Added animation
         animation: "shimmer 2s linear infinite",
       }}
     >
@@ -46,7 +46,6 @@ animation: "ripple 2s infinite", // Added animation
           padding: "0px",
           display: "block", // Ensures the button is a block-level element
           margin: "0 auto", // Centers the button horizontally
-          
           cursor,
           opacity,
           transition: "all 0.3s ease",
@@ -57,7 +56,7 @@ animation: "ripple 2s infinite", // Added animation
             width: "300px",
             height: "300px",
             borderRadius: "50%",
-            background: `url('https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png')`,
+            background: `url(${logoUrl || defaultLogoUrl})`,
             backgroundSize: "cover",
             backgroundPosition: "center", // Ensured background image is centered
             boxShadow: "0 0 40px 10px rgba(0, 0, 100, 0.7)",

@@ -108,10 +108,13 @@ const App = () => {
     <div
       style={{
         display: "flex",
+        flexDirection: "column",
         width: "100vw",
         height: "100vh",
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "#f0f0f0",
+        fontFamily: "Arial, sans-serif"
       }}
     >
       <h1>Welcome to LegalScout</h1>

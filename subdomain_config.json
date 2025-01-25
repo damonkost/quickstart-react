@@ -1,0 +1,11 @@
+{
+    "example-subdomain": {
+        "logo": "https://example.com/logo.png",
+        "mascot": "https://example.com/mascot.png",
+        "vapi_url": "https://example.com/vapi",
+        "firmName": "Example Firm",
+        "vapiInstructions": "Example instructions",
+        "vapiContext": "Example context",
+        "interactionDepositUrl": "https://example.com/deposit"
+    }
+}

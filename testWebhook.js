@@ -20,3 +20,6 @@ axios.post(webhookUrl, payload)
     .catch(error => {
         console.error('Error:', error.response ? error.response.data : error.message);
     });
+
+// Test the Webhook
+// Use the `testWebhook.js` script to simulate the webhook call and verify that the serverless function processes the data correctly.

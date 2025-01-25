@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import ActiveCallDetail from "./components/ActiveCallDetail";
 import Button from "./components/base/Button";
 import Vapi from "@vapi-ai/web";
@@ -11,7 +10,6 @@ const vapi = new Vapi("310f0d43-27c2-47a5-a76d-e55171d024f7"); // Replace with y
 const App = () => {
   const [connecting, setConnecting] = useState(false);
   const [connected, setConnected] = useState(false);
-
   const [assistantIsSpeaking, setAssistantIsSpeaking] = useState(false);
   const [volumeLevel, setVolumeLevel] = useState(0);
   const [microphoneAllowed, setMicrophoneAllowed] = useState(false); // Add state for microphone permission
@@ -23,14 +21,12 @@ const App = () => {
     const handleCallStart = () => {
       setConnecting(false);
       setConnected(true);
-
       setShowPublicKeyInvalidMessage(false);
     };
 
     const handleCallEnd = () => {
       setConnecting(false);
       setConnected(false);
-
       setShowPublicKeyInvalidMessage(false);
     };
 

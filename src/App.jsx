@@ -114,6 +114,7 @@ const App = () => {
         alignItems: "center",
       }}
     >
+      <h1>Welcome to LegalScout</h1>
       {!connected ? (
         <Button
           label="Call Scout"

@@ -5,10 +5,8 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch LegalScout",
-            "url": "https://scout.legalscout.net/",
-            "webRoot": "${workspaceFolder}",
-            "sourceMaps": true,
-            "trace": true,
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}"
         }
     ]
 }

@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { getSubdomain } from "../../utils/getSubdomain";
 
-const Button = ({ label, onClick, isLoading, disabled = false, logoUrl }) => {
+const Button = ({ label, onClick, isLoading, disabled = false }) => {
+  const [logoUrl, setLogoUrl] = useState(null);
+  const defaultLogoUrl = "https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png";
+
+  useEffect(() => {
+    const subdomain = getSubdomain();
+    if (subdomain && subdomain !== "scout") {
+      fetch(`/subdomain_config.json`)
+        .then(response => response.json())
+        .then(data => {
+          if (data[subdomain]) {
+            setLogoUrl(data[subdomain].logo);
+          }
+        })
+        .catch(error => console.error("Error fetching subdomain config:", error));
+    }
+  }, []);
+
   const opacity = disabled ? 0.75 : 1;
   const cursor = disabled ? "not-allowed" : "pointer";
-  const defaultLogoUrl = "https://res.cloudinary.com/glide/image/fetch/f_auto,w_500,c_limit/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FZf7Uh2x67Yz3nEftEH2i%2Fpub%2FipEv2VSSLIL0o0e2ostK.png";
 
   const Contents = isLoading ? (
     <ScaleLoader

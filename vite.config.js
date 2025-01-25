@@ -7,6 +7,9 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: true, // Enable source maps for debugging
     rollupOptions: {
+      input: {
+        main: './index.html'
+      },
       output: {
         entryFileNames: 'assets/[name].[hash].js',
         chunkFileNames: 'assets/[name].[hash].js',

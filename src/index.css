@@ -1,12 +1,11 @@
 /* index.css */
 
 body {
-  margin: 0;
-  background-color: #000000;
-  font-family: "Inter", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: Arial, sans-serif; /* Ensure a default font is set */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  background-color: #f9f9f9; /* Set a background color */
+  color: #333; /* Set a default text color */
 }
 
 p {
@@ -23,11 +22,10 @@ header {
   position: fixed; /* Keep the header in view */
   top: 0;         /* Position it at the top */
   left: 0;        /* Position it at the left */
-  width: 100%;    /* Make it span the full width */
+  /* width: 100%;    Make it span the full width */
   z-index: 100;    /* Ensure it's on top of other elements */
   background-color: #171717; /* Add background color to the header */
 }
-
 
 nav {
   display: flex; /* Make the nav a flex container */
@@ -73,7 +71,7 @@ nav {
 }
 
 .hero img {
-  max-width: auto;
+  max-width: 100%;
   height: auto;
   margin-top: 20px;
 }
@@ -120,6 +118,10 @@ nav {
   margin-top: 10px; 
 }
 
+#app {
+  padding: 20px; /* Add some padding to the root element */
+}
+
 /* index.css */
 
 /* ... other styles ... */
@@ -128,8 +130,8 @@ nav {
   display: flex;
   justify-content: center; /* Add this to center horizontally */
   align-items: center;   
-
 }
+
 @keyframes ripple {
   0% {
     box-shadow: 0 0 40px 10px rgba(0, 0, 100, 0.7);

@@ -40,8 +40,12 @@ async function updateTable() {
 module.exports = async (req, res) => {
     try {
         console.log('Received webhook request:', req.body);
-        // Parse the JSON payload from the webhook request
         const payload = req.body;
+        
+        // Validate webhook source
+        if (!payload || !payload.subdomain) {
+            throw new Error('Invalid payload structure');
+        }
 
         // Add validation for webhook source
         const webhookUrl = 'https://hook.us1.make.com/xovnaaoshufg71xjnx7h6blgdv1l2mwl';
@@ -86,11 +90,16 @@ module.exports = async (req, res) => {
         // Update the table
         await updateTable();
 
-        // Return a success message
-        res.status(200).json({ message: "Attorney data updated successfully!" });
+        // Return success with CORS headers
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'POST');
+        res.status(200).json({ 
+            success: true,
+            message: "Attorney data updated successfully!",
+            subdomain: payload.subdomain
+        });
     } catch (error) {
         console.error('Webhook processing error:', error);
-        // Handle any errors that occur during the process
-        res.status(500).json({ error: `Error processing webhook: ${error.message}` });
+        res.status(500).json({ error: error.message });
     }
 };

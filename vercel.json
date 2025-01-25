@@ -2,14 +2,14 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "vite",
-  "routes": [
+  "rewrites": [
     {
-      "src": "/favicon.ico",
-      "dest": "/public/favicon.ico"
+      "source": "/favicon.ico",
+      "destination": "/public/favicon.ico"
     },
     {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "source": "/(.*)",
+      "destination": "/$1"
     }
   ],
   "headers": [

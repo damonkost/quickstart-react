@@ -1,11 +1,10 @@
 /* index.css */
 
 body {
-  font-family: Arial, sans-serif; /* Ensure a default font is set */
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
-  background-color: #f9f9f9; /* Set a background color */
-  color: #333; /* Set a default text color */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
 }
 
 p {

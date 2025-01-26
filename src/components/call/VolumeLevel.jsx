@@ -22,7 +22,6 @@ const VolumeLevel = ({ volume }) => {
           />
         ))}
       </div>
-      <div style={{ color: "white" }}>{volume}</div>
     </div>
   );
 };

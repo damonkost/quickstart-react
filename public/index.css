@@ -57,7 +57,7 @@ header {
     margin: 0 1rem;
     text-decoration: none;
     color: #333;
-    background-color: #e9ecef; /* Light grey background */
+
     padding: 0.5rem 1rem; /* Add padding for button-like appearance */
     border-radius: 5px; /* Rounded corners */
     transition: background-color 0.3s ease; /* Smooth transition on hover */

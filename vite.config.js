@@ -18,11 +18,18 @@ export default defineConfig({
       output: {
         sourcemapExcludeSources: true,
         sourcemapPathTransform: (relativeSourcePath) => {
-          // Handle unsupported protocols
-          if (relativeSourcePath.startsWith('chrome-error:')) {
+          // Filter out problematic protocols
+          const invalidProtocols = ['chrome-error:', 'chrome://', 'chrome-extension://'];
+          if (invalidProtocols.some(protocol => relativeSourcePath.startsWith(protocol))) {
             return null;
           }
-          return relativeSourcePath;
+          // Normalize path for Windows
+          return path.normalize(relativeSourcePath);
+        },
+        // Exclude problematic source maps
+        sourcemapIgnoreList: (relativeSourcePath) => {
+          return relativeSourcePath.includes('chrome-error') || 
+                 relativeSourcePath.includes('neterror');
         }
       }
     }

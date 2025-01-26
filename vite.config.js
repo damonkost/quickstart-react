@@ -2,11 +2,16 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import fs from 'fs'
 import path from 'path'
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
+    open: true,
     https: {
       key: fs.readFileSync(path.resolve(__dirname, './certs/key.pem')),
       cert: fs.readFileSync(path.resolve(__dirname, './certs/cert.pem'))
@@ -18,18 +23,11 @@ export default defineConfig({
       output: {
         sourcemapExcludeSources: true,
         sourcemapPathTransform: (relativeSourcePath) => {
-          // Filter out problematic protocols
           const invalidProtocols = ['chrome-error:', 'chrome://', 'chrome-extension://'];
           if (invalidProtocols.some(protocol => relativeSourcePath.startsWith(protocol))) {
             return null;
           }
-          // Normalize path for Windows
           return path.normalize(relativeSourcePath);
-        },
-        // Exclude problematic source maps
-        sourcemapIgnoreList: (relativeSourcePath) => {
-          return relativeSourcePath.includes('chrome-error') || 
-                 relativeSourcePath.includes('neterror');
         }
       }
     }

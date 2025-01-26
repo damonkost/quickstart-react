@@ -28,7 +28,6 @@ const Button = ({ label, onClick, isLoading, disabled = false }) => {
         backgroundSize: "200% 200%",
         WebkitBackgroundClip: "text",
         WebkitTextFillColor: "transparent",
-animation: "ripple 2s infinite", // Added animation
         animation: "shimmer 2s linear infinite",
       }}
     >
@@ -46,7 +45,6 @@ animation: "ripple 2s infinite", // Added animation
           padding: "0px",
           display: "block", // Ensures the button is a block-level element
           margin: "0 auto", // Centers the button horizontally
-          
           cursor,
           opacity,
           transition: "all 0.3s ease",
@@ -85,7 +83,12 @@ animation: "ripple 2s infinite", // Added animation
               animation: "emanate 2s infinite alternate",
             }}
           />
-
+          {/* Render only the bars */}
+          <div className="volume-bars">
+            <div className="bar"></div>
+            <div className="bar"></div>
+            <div className="bar"></div>
+          </div>
           {Contents}
         </div>
       </button>

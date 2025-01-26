@@ -48,6 +48,7 @@ header {
 #root {
     margin-top: 10px; /* Adjust this value to reduce space above the button */
 }
+
 .nav-links {
     display: flex; /* Ensures buttons are in a line */
     align-items: center; /* Vertically align button content */
@@ -57,7 +58,6 @@ header {
     margin: 0 2rem;
     text-decoration: none;
     color: #333;
-
     padding: 0.7rem 1rem; /* Add padding for button-like appearance */
     border-radius: 3px; /* Rounded corners */
     transition: background-color 0.3s ease; /* Smooth transition on hover */

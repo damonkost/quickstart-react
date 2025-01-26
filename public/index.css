@@ -48,3 +48,22 @@ header {
 #root {
     margin-top: 0px; /* Adjust this value to reduce space above the button */
 }
+.nav-links {
+    display: flex; /* Ensures buttons are in a line */
+    align-items: center; /* Vertically align button content */
+}
+
+.nav-links a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: #333;
+    background-color: #e9ecef; /* Light grey background */
+    padding: 0.5rem 1rem; /* Add padding for button-like appearance */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.nav-links a:hover {
+    background-color: #ced4da; /* Slightly darker grey on hover */
+    color: #333; /* Keep text color the same on hover */
+}

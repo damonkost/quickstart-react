@@ -37,9 +37,14 @@ header {
 .statement {
     text-align: center;
     color: #495057;
+    margin-bottom: 20px; /* Adjust this value to reduce space below the hero text */
 }
 
 .statement p span {
     display: block;
     margin: 0.5rem 0;
+}
+
+#root {
+    margin-top: 20px; /* Adjust this value to reduce space above the button */
 }

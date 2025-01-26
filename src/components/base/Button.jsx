@@ -83,12 +83,6 @@ const Button = ({ label, onClick, isLoading, disabled = false }) => {
               animation: "emanate 2s infinite alternate",
             }}
           />
-          {/* Render only the bars */}
-          <div className="volume-bars">
-            <div className="bar"></div>
-            <div className="bar"></div>
-            <div className="bar"></div>
-          </div>
           {Contents}
         </div>
       </button>

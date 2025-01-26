@@ -46,7 +46,7 @@ header {
 }
 
 #root {
-    margin-top: 0px; /* Adjust this value to reduce space above the button */
+    margin-top: 10px; /* Adjust this value to reduce space above the button */
 }
 .nav-links {
     display: flex; /* Ensures buttons are in a line */
@@ -54,12 +54,12 @@ header {
 }
 
 .nav-links a {
-    margin: 0 1rem;
+    margin: 0 2rem;
     text-decoration: none;
     color: #333;
 
-    padding: 0.5rem 1rem; /* Add padding for button-like appearance */
-    border-radius: 5px; /* Rounded corners */
+    padding: 0.7rem 1rem; /* Add padding for button-like appearance */
+    border-radius: 3px; /* Rounded corners */
     transition: background-color 0.3s ease; /* Smooth transition on hover */
 }
 

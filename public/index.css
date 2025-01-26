@@ -1,0 +1,39 @@
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #f8f9fa;
+    padding: 1rem;
+}
+
+.nav-links a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: #333;
+}
+
+.nav-links a:hover {
+    color: #007bff;
+}
+
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #e9ecef;
+}
+
+.statement {
+    text-align: center;
+    color: #495057;
+}
+
+.statement p span {
+    display: block;
+    margin: 0.5rem 0;
+}

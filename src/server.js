@@ -5,31 +5,43 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const port = process.env.PORT || 3001; // Choose a suitable port
+const port = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(bodyParser.json());
 
 app.get('/api/attorneys', (req, res) => {
+  // ... (existing GET request handler logic)
+});
+
+// POST request handler (to update attorney data)
+app.post('/api/attorneys', (req, res) => {
+  const newAttorneyData = req.body;
   const filePath = path.join(__dirname, '../../subdomain_config.json');
 
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
       console.error('Error reading subdomain_config.json:', err);
-      return res.status(500).json({ error: 'Failed to fetch attorney data' });
+      return res.status(500).json({ error: 'Failed to update attorney data' });
     }
 
     try {
       const configData = JSON.parse(data);
-      const attorneyData = Object.entries(configData).map(([subdomain, data]) => ({
-        subdomain,
-        ...data,
-      }));
 
-      res.json(attorneyData);
+      // Merge new data with existing data (example implementation)
+      const updatedConfigData = { ...configData, ...newAttorneyData };
+
+      fs.writeFile(filePath, JSON.stringify(updatedConfigData, null, 2), 'utf8', (writeErr) => {
+        if (writeErr) {
+          console.error('Error writing subdomain_config.json:', writeErr);
+          return res.status(500).json({ error: 'Failed to update attorney data' });
+        }
+
+        res.json({ message: 'Attorney data updated successfully' });
+      });
     } catch (parseError) {
       console.error('Error parsing subdomain_config.json:', parseError);
-      return res.status(500).json({ error: 'Failed to parse attorney data' });
+      return res.status(500).json({ error: 'Failed to update attorney data' });
     }
   });
 });

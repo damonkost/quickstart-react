@@ -30,7 +30,7 @@ header {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #05101a;
+    background-color: #000000;
     margin-top: 80px; /* Adjust this value based on the height of your header */
 }
 

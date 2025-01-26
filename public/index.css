@@ -8,6 +8,11 @@ body {
 header {
     background-color: #f8f9fa;
     padding: 1rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 .nav-links a {
@@ -26,6 +31,7 @@ header {
     align-items: center;
     height: 100vh;
     background-color: #e9ecef;
+    margin-top: 80px; /* Adjust this value based on the height of your header */
 }
 
 .statement {

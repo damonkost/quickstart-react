@@ -4,7 +4,7 @@
     {
       "src": "/api/attorneys",
       "methods": ["POST", "GET"],
-      "dest": "/api/attorneys.js"
+      "dest": "/api/attorneys"
     }
   ]
 } 

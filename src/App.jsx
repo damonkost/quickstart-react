@@ -83,18 +83,20 @@ const App = ({ initialProfile }) => {
         const subdomain = window.location.hostname.split('.')[0];
         console.log('Debug - Subdomain:', subdomain);
 
-        // Force HTTPS and use full URL
-        const baseUrl = process.env.NODE_ENV === 'production' 
-          ? 'https://legalscout.net' 
-          : window.location.origin;
-        
-        const apiUrl = `${baseUrl}/api/v1/attorneys?subdomain=${subdomain}`;
-        console.log('Debug - API URL:', apiUrl);
+        if (subdomain === 'localhost' || subdomain === 'legalscout') {
+          console.log('Debug - Using default profile');
+          return setAttorneyProfile({
+            firmName: 'LegalScout',
+            vapiInstructions: null,
+            logo: "https://res.cloudinary.com/glide/image/fetch/f_auto,c_limit/https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fglide-prod.appspot.com%2Fo%2Ficon-images%252Fanonymous-4ec86c98-f143-4160-851d-892f167b223c.png%3Falt%3Dmedia%26token%3Dcdc26513-26ae-48f6-b085-85b8bb806c4c"
+          });
+        }
 
-        const response = await fetch(apiUrl, {
+        // Use relative URL and add error handling
+        const response = await fetch(`/api/v1/attorneys?subdomain=${subdomain}`, {
           headers: {
             'Accept': 'application/json',
-            'Cache-Control': 'no-cache'
+            'Content-Type': 'application/json',
           }
         });
 
@@ -102,17 +104,25 @@ const App = ({ initialProfile }) => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data = await response.json();
-        console.log('Debug - API Response:', data);
+        const result = await response.json();
+        console.log('Debug - API Response:', result);
 
-        if (data?.data) {
-          setAttorneyProfile(data.data);
-          console.log('Debug - Set attorney profile:', data.data);
+        if (result?.status === 'success' && result?.data) {
+          setAttorneyProfile(result.data);
+          console.log('Debug - Set attorney profile:', result.data);
+        } else {
+          console.log('Debug - Using default profile (no data)');
+          setAttorneyProfile({
+            firmName: 'LegalScout',
+            vapiInstructions: null,
+            logo: "https://res.cloudinary.com/glide/image/fetch/f_auto,c_limit/https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fglide-prod.appspot.com%2Fo%2Ficon-images%252Fanonymous-4ec86c98-f143-4160-851d-892f167b223c.png%3Falt%3Dmedia%26token%3Dcdc26513-26ae-48f6-b085-85b8bb806c4c"
+          });
         }
       } catch (error) {
         console.error('Error fetching profile:', error);
         setAttorneyProfile({
           firmName: 'LegalScout',
+          vapiInstructions: null,
           logo: "https://res.cloudinary.com/glide/image/fetch/f_auto,c_limit/https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fglide-prod.appspot.com%2Fo%2Ficon-images%252Fanonymous-4ec86c98-f143-4160-851d-892f167b223c.png%3Falt%3Dmedia%26token%3Dcdc26513-26ae-48f6-b085-85b8bb806c4c"
         });
       }
@@ -140,11 +150,14 @@ const App = ({ initialProfile }) => {
         instructions: attorneyProfile?.vapiInstructions || 'I am a legal assistant'
       };
 
-      vapi.start('e3fff1dd-2e82-4cce-ac6c-8c3271eb0865', assistantOverrides);
+      if (attorneyProfile?.vapiContext) {
+        vapi.start(attorneyProfile.vapiContext, assistantOverrides);
+      } else {
+        vapi.start('e3fff1dd-2e82-4cce-ac6c-8c3271eb0865', assistantOverrides);
+      }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error starting call:", error);
       setError('Failed to start call');
-    } finally {
       setConnecting(false);
     }
   };

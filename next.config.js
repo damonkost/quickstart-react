@@ -1,21 +1,17 @@
-module.exports = {
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: 'https://legalscout.net/api/:path*',
-      },
-    ];
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  webpack: (config, { isServer }) => {
+    // Add CSS handling
+    config.module.rules.push({
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader'],
+    });
+
+    return config;
   },
-  async headers() {
-    return [
-      {
-        source: '/api/:path*',
-        headers: [
-          { key: 'Access-Control-Allow-Origin', value: '*' },
-          { key: 'Access-Control-Allow-Methods', value: 'GET' },
-        ],
-      },
-    ]
-  }
-} 
+  // Handle external packages
+  transpilePackages: ['@vapi-ai/web', 'react-spinners'],
+}
+
+module.exports = nextConfig 

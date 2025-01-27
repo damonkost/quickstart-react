@@ -1,9 +1,8 @@
 {
   "version": 2,
-  "routes": [
-    {
+  "rewrites": [
+    { 
       "source": "/api/attorneys",
-      "methods": ["POST", "GET"],
       "destination": "/api/attorneys"
     }
   ]

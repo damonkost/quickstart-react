@@ -38,34 +38,38 @@ app.get('/api/attorneys', (req, res) => {
 });
 
 // POST request handler (to update attorney data)
-app.post('/api/attorneys', (req, res) => {
-  const newAttorneyData = req.body;
+app.post('/api/attorneys', express.json(), (req, res) => {
+  const { subdomain, firmName, logo, mascot, vapiInstructions, vapiContext, interactionDepositUrl } = req.body;
+  
   const filePath = path.join(__dirname, '../../subdomain_config.json');
-
+  
   fs.readFile(filePath, 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading subdomain_config.json:', err);
-      return res.status(500).json({ error: 'Failed to update attorney data' });
+    let configData = {};
+    if (!err) {
+      try {
+        configData = JSON.parse(data);
+      } catch (parseError) {
+        console.error('Error parsing existing config:', parseError);
+      }
     }
 
-    try {
-      const configData = JSON.parse(data);
+    // Update or add new subdomain configuration
+    configData[subdomain] = {
+      firmName,
+      logoUrl: logo,
+      mascotUrl: mascot,
+      vapiAssistantId: vapiContext,
+      agentInstructions: vapiInstructions,
+      interactionDepositUrl
+    };
 
-      // Merge new data with existing data (example implementation)
-      const updatedConfigData = { ...configData, ...newAttorneyData };
-
-      fs.writeFile(filePath, JSON.stringify(updatedConfigData, null, 2), 'utf8', (writeErr) => {
-        if (writeErr) {
-          console.error('Error writing subdomain_config.json:', writeErr);
-          return res.status(500).json({ error: 'Failed to update attorney data' });
-        }
-
-        res.json({ message: 'Attorney data updated successfully' });
-      });
-    } catch (parseError) {
-      console.error('Error parsing subdomain_config.json:', parseError);
-      return res.status(500).json({ error: 'Failed to update attorney data' });
-    }
+    fs.writeFile(filePath, JSON.stringify(configData, null, 2), 'utf8', (writeErr) => {
+      if (writeErr) {
+        console.error('Error writing config:', writeErr);
+        return res.status(500).json({ error: 'Failed to save attorney data' });
+      }
+      res.json({ success: true, data: configData[subdomain] });
+    });
   });
 });
 

@@ -12,6 +12,7 @@ const App = () => {
   const [connecting, setConnecting] = useState(false);
   const [connected, setConnected] = useState(false);
   const [attorneyProfile, setAttorneyProfile] = useState(null);
+  const [error, setError] = useState(null);
 
   const [assistantIsSpeaking, setAssistantIsSpeaking] = useState(false);
   const [volumeLevel, setVolumeLevel] = useState(0);
@@ -80,59 +81,54 @@ const App = () => {
     const fetchAttorneyProfile = async () => {
       try {
         const subdomain = window.location.hostname.split('.')[0];
-        // Update this URL to point to your attorney profile endpoint
-        const response = await fetch(`/api/attorney-profile?subdomain=${subdomain}`, {
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-        
-        if (!response.ok) {
-          throw new Error('Failed to fetch attorney profile');
-        }
-        
+        const response = await fetch(`/api/v1/attorneys?subdomain=${subdomain}`);
         const data = await response.json();
-        setAttorneyProfile(data);
+        
+        if (data && data.vapiInstructions) {
+          setAttorneyProfile(data);
+        } else {
+          console.warn('No VAPI instructions found for subdomain:', subdomain);
+        }
       } catch (error) {
-        console.error("Error fetching attorney profile:", error);
+        console.error('Error fetching attorney profile:', error);
+        setError('Failed to load attorney configuration');
       }
     };
 
     fetchAttorneyProfile();
   }, []);
 
-  // call start handler
-  const startCallInline = async () => { 
-    setConnecting(true);
-
+  const startCall = async () => {
     try {
-      // Request microphone access
-      await navigator.mediaDevices.getUserMedia({ audio: true });
-      setMicrophoneAllowed(true); 
-
+      setConnecting(true);
+      
+      // Get the base VAPI configuration
       const assistantOverrides = {
-        transcriber: {
-          provider: "deepgram",
-          model: "nova-2",
-          language: "en-US",
-        },
-        recordingEnabled: true, 
-        // Add any other overrides you need here, like:
-        // endCallOnNoSpeech: false,  // Disable automatic end on no speech
-        // maxDuration: 3600,        // Set a longer max duration (in seconds) 
+        name: attorneyProfile?.firmName || 'LegalScout',
+        instructions: attorneyProfile?.vapiInstructions || 'I am a legal assistant',
+        maxDuration: 3600
       };
 
-      vapi.start('e3fff1dd-2e82-4cce-ac6c-8c3271eb0865', assistantOverrides); 
+      console.log('Starting VAPI with config:', assistantOverrides);
+
+      // Initialize VAPI with attorney-specific instructions
+      vapi.start('e3fff1dd-2e82-4cce-ac6c-8c3271eb0865', assistantOverrides);
+      
     } catch (error) {
-      console.error("Error accessing microphone:", error);
+      console.error("Error starting call:", error);
+      setError('Failed to start call');
+    } finally {
       setConnecting(false);
-      // Handle microphone access errors (e.g., display an error message)
     }
   };
 
   const endCall = () => {
     vapi.stop();
   };
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div
@@ -146,8 +142,8 @@ const App = () => {
     >
       {!connected ? (
         <Button
-          label="Call Scout"
-          onClick={startCallInline}
+          label={`Talk to ${attorneyProfile?.firmName || 'LegalScout'}`}
+          onClick={startCall}
           isLoading={connecting}
           disabled={!microphoneAllowed} // Disable button if mic access is not allowed
           icon={<LegalScoutIcon />} 

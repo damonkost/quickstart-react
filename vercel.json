@@ -2,9 +2,9 @@
   "version": 2,
   "routes": [
     {
-      "src": "/api/attorneys",
+      "source": "/api/attorneys",
       "methods": ["POST", "GET"],
-      "dest": "/api/attorneys"
+      "destination": "/api/attorneys"
     }
   ]
 } 

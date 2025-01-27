@@ -1,6 +1,5 @@
 import React from 'react';
 import Head from 'next/head';
-import '../styles/index.css'; // Import the CSS file
 
 const App = ({ attorneyProfile }) => {
   const title = attorneyProfile.firmName || 'LegalScout';

@@ -8,10 +8,10 @@ import { isPublicKeyMissingError } from "./utils";
 // Put your Vapi Public Key below.
 const vapi = new Vapi("310f0d43-27c2-47a5-a76d-e55171d024f7"); // Replace with your actual public key
 
-const App = () => {
+const App = ({ initialProfile }) => {
   const [connecting, setConnecting] = useState(false);
   const [connected, setConnected] = useState(false);
-  const [attorneyProfile, setAttorneyProfile] = useState(null);
+  const [attorneyProfile, setAttorneyProfile] = useState(initialProfile);
   const [error, setError] = useState(null);
 
   const [assistantIsSpeaking, setAssistantIsSpeaking] = useState(false);

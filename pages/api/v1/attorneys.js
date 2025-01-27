@@ -1,21 +1,29 @@
 export default function handler(req, res) {
+  // Set cache headers
+  res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=59');
+  
+  // Log request info
+  console.log('Request headers:', req.headers);
+  console.log('Cache status:', req.headers['x-vercel-cache']);
+
   // Set JSON content type
   res.setHeader('Content-Type', 'application/json');
 
-  // Log the request
-  console.log('API Request:', {
-    method: req.method,
-    path: req.url,
-    headers: req.headers
-  });
-
   // GET request
   if (req.method === 'GET') {
-    return res.status(200).json({
-      status: 'success',
-      message: 'API is working',
-      timestamp: new Date().toISOString()
-    });
+    try {
+      return res.status(200).json({
+        status: 'success',
+        message: 'API is working',
+        timestamp: new Date().toISOString(),
+        cacheStatus: req.headers['x-vercel-cache']
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: 'error',
+        message: error.message
+      });
+    }
   }
 
   // POST request

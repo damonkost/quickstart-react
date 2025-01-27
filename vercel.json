@@ -8,11 +8,11 @@
   ],
   "headers": [
     {
-      "source": "/api/v1/check-config",
+      "source": "/api/v1/attorneys",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "s-maxage=1, stale-while-revalidate"
+          "value": "s-maxage=60, stale-while-revalidate=59"
         }
       ]
     }

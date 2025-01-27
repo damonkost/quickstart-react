@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import ActiveCallDetail from "./components/ActiveCallDetail";
 import Button from "./components/base/Button";
 import Vapi from "@vapi-ai/web";
 import { isPublicKeyMissingError } from "./utils";
+import { getAttorneyConfig } from './config/attorneys';
 
 // Put your Vapi Public Key below.
 const vapi = new Vapi("310f0d43-27c2-47a5-a76d-e55171d024f7");
@@ -10,10 +11,7 @@ const vapi = new Vapi("310f0d43-27c2-47a5-a76d-e55171d024f7");
 const App = () => {
   const [connecting, setConnecting] = useState(false);
   const [connected, setConnected] = useState(false);
-  const [attorneyProfile, setAttorneyProfile] = useState({
-    firmName: 'LegalScout',
-    logo: "https://res.cloudinary.com/glide/image/fetch/f_auto,c_limit/https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fglide-prod.appspot.com%2Fo%2Ficon-images%252Fanonymous-4ec86c98-f143-4160-851d-892f167b223c.png%3Falt%3Dmedia%26token%3Dcdc26513-26ae-48f6-b085-85b8bb806c4c"
-  });
+  const [attorneyProfile, setAttorneyProfile] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [assistantIsSpeaking, setAssistantIsSpeaking] = useState(false);
@@ -27,47 +25,11 @@ const App = () => {
       try {
         setIsLoading(true);
         const subdomain = window.location.hostname.split('.')[0];
-        console.log('Debug - Subdomain:', subdomain);
-
-        if (subdomain === 'localhost' || subdomain === 'legalscout') {
-          console.log('Debug - Using default profile');
-          document.title = 'LegalScout';
-          setIsLoading(false);
-          return;
-        }
-
-        // Use legalscout.net as the base URL
-        const baseUrl = 'https://legalscout.net';
-        const apiUrl = `${baseUrl}/api/v1/attorneys?subdomain=${subdomain}`;
-        console.log('Debug - API URL:', apiUrl);
-
-        const response = await fetch(apiUrl, {
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          mode: 'cors'  // Enable CORS
-        });
-
-        if (!response.ok) {
-          const text = await response.text();
-          console.error('API Response Text:', text);
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const result = await response.json();
-        console.log('Debug - API Response:', result);
-
-        if (result?.status === 'success' && result?.data) {
-          setAttorneyProfile(result.data);
-          document.title = result.data.firmName;
-          console.log('Debug - Set attorney profile:', result.data);
-        }
-      } catch (error) {
-        console.error('Error fetching profile:', error);
-        // Don't override default profile on error
-        document.title = attorneyProfile.firmName;
-        setError(error.message);
+        const config = getAttorneyConfig();
+        const attorneyData = config[subdomain] || config['default'];
+        setAttorneyProfile(attorneyData);
+      } catch (err) {
+        setError(err.message);
       } finally {
         setIsLoading(false);
       }
@@ -143,6 +105,8 @@ const App = () => {
       </div>
     );
   }
+
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div style={{

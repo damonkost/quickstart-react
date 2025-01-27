@@ -12,8 +12,6 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
       const subdomain = req.query.subdomain;
-      console.log('Handling request for subdomain:', subdomain);
-
       const config = getAttorneyConfig();
       const attorneyData = config[subdomain] || config['default'];
 
@@ -22,7 +20,6 @@ export default async function handler(req, res) {
         data: attorneyData
       });
     } catch (error) {
-      console.error('API Error:', error);
       return res.status(500).json({
         status: 'error',
         message: error.message

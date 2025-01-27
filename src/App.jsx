@@ -25,9 +25,19 @@ const App = () => {
       try {
         setIsLoading(true);
         const subdomain = window.location.hostname.split('.')[0];
-        const config = getAttorneyConfig();
-        const attorneyData = config[subdomain] || config['default'];
-        setAttorneyProfile(attorneyData);
+        const response = await fetch(`/api/v1/attorneys?subdomain=${subdomain}`);
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch attorney profile');
+        }
+
+        const result = await response.json();
+        if (result.status === 'success') {
+          setAttorneyProfile(result.data);
+          document.title = result.data.firmName; // Set the document title dynamically
+        } else {
+          throw new Error(result.message);
+        }
       } catch (err) {
         setError(err.message);
       } finally {

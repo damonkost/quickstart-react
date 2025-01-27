@@ -8,11 +8,5 @@
         "cache-control": "s-maxage=1, stale-while-revalidate"
       }
     }
-  ],
-  "functions": {
-    "pages/api/**": {
-      "memory": 1024,
-      "maxDuration": 10
-    }
-  }
+  ]
 } 

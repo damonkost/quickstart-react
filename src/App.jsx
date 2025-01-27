@@ -4,6 +4,7 @@ import Button from "./components/base/Button";
 import Vapi from "@vapi-ai/web";
 import { isPublicKeyMissingError } from "./utils";
 import { getAttorneyConfig } from './config/attorneys';
+import Head from 'next/head';
 
 // Put your Vapi Public Key below.
 const vapi = new Vapi("310f0d43-27c2-47a5-a76d-e55171d024f7");
@@ -118,6 +119,9 @@ const App = () => {
 
   if (error) return <div>Error: {error}</div>;
 
+  // Set a fallback title
+  const title = attorneyProfile ? attorneyProfile.firmName : 'LegalScout';
+
   return (
     <div style={{
       display: "flex",
@@ -128,6 +132,9 @@ const App = () => {
       flexDirection: "column",
       gap: "2rem"
     }}>
+      <Head>
+        <title>{title}</title>
+      </Head>
       {!connected ? (
         <>
           {attorneyProfile?.logo && (

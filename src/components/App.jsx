@@ -1,20 +1,25 @@
 import React from 'react';
 import Head from 'next/head';
+import '../styles/index.css'; // Import the CSS file
 
 const App = ({ attorneyProfile }) => {
   const title = attorneyProfile.firmName || 'LegalScout';
   const logo = attorneyProfile.logo || '/images/default-logo.png'; // Ensure a default logo path
 
+  console.log('Received Attorney Profile:', attorneyProfile);
+
   return (
-    <div style={{
-      display: "flex",
-      width: "100vw",
-      height: "100vh",
-      justifyContent: "center",
-      alignItems: "center",
-      flexDirection: "column",
-      gap: "2rem"
-    }}>
+    <div
+      style={{
+        display: 'flex',
+        width: '100vw',
+        height: '100vh',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+        gap: '2rem',
+      }}
+    >
       <Head>
         <title>{title}</title> {/* Dynamic Title */}
       </Head>
@@ -25,9 +30,9 @@ const App = ({ attorneyProfile }) => {
               className="logo"
               src={logo}
               alt={`${title} Logo`}
-              style={{ maxWidth: "150px", height: "auto" }}
+              style={{ maxWidth: '150px', height: 'auto' }}
               onError={(e) => {
-                console.log('Logo failed to load');
+                console.log('Logo failed to load:', e);
                 e.target.style.display = 'none';
               }}
             />
@@ -47,7 +52,11 @@ const App = ({ attorneyProfile }) => {
             <span>knowledgeable about your case and eager to help.</span>
           </p>
           <button>
-            <img src={logo} alt={`${title} Logo`} style={{ maxWidth: "50px", marginRight: "10px" }} />
+            <img
+              src={logo}
+              alt={`${title} Logo`}
+              style={{ maxWidth: '30px', marginRight: '10px' }}
+            />
             Talk to {title}
           </button>
         </div>

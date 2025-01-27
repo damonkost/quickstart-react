@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 import App from '../src/components/App';
 import { getAttorneyConfig } from '../src/config/attorneys';
 
@@ -14,6 +13,10 @@ export const getServerSideProps = async ({ req }) => {
   // Fetch the attorney configuration based on the subdomain
   const config = getAttorneyConfig();
   const attorneyData = config[subdomain] || config['default'];
+
+  console.log('Host:', host);
+  console.log('Subdomain:', subdomain);
+  console.log('Attorney Data:', attorneyData);
 
   if (!attorneyData) {
     return {

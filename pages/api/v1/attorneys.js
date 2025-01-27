@@ -13,16 +13,24 @@ export default function handler(req, res) {
   if (req.method === 'GET') {
     try {
       const { subdomain } = req.query;
+      console.log('Received subdomain:', subdomain);
       
-      // Default LegalScout configuration - no VAPI instructions
+      // Normalize the subdomain for comparison
+      const normalizedSubdomain = subdomain
+        ?.toLowerCase()
+        .replace(/%20/g, ' ')  // Handle URL encoding
+        .replace(/-/g, ' ');   // Handle hyphens
+      
+      console.log('Normalized subdomain:', normalizedSubdomain);
+
       let attorneyData = {
         firmName: 'LegalScout',
         logo: "https://res.cloudinary.com/glide/image/fetch/f_auto,c_limit/https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fglide-prod.appspot.com%2Fo%2Ficon-images%252Fanonymous-4ec86c98-f143-4160-851d-892f167b223c.png%3Falt%3Dmedia%26token%3Dcdc26513-26ae-48f6-b085-85b8bb806c4c",
-        vapiInstructions: null  // No default instructions
+        vapiInstructions: null
       };
 
-      // If subdomain is gco, use General Counsel Online configuration
-      if (subdomain === 'gco') {
+      // Check for both "gco" and "general counsel online"
+      if (normalizedSubdomain === 'gco' || normalizedSubdomain === 'general counsel online') {
         attorneyData = {
           firmName: "General Counsel Online",
           logo: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/pSrOHjaijGufsy7FzIva/pub/1ivEGn6E6pjoAmFHAwSU.png",
@@ -30,7 +38,7 @@ export default function handler(req, res) {
         };
       }
 
-      console.log('Returning data for subdomain:', subdomain);
+      console.log('Sending response:', attorneyData);
       
       return res.status(200).json({
         status: 'success',

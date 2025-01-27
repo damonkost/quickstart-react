@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Head from 'next/head';
 import '../src/index.css';
 
 function MyApp({ Component, pageProps }) {
@@ -12,7 +13,6 @@ function MyApp({ Component, pageProps }) {
         const data = await response.json();
         if (data?.data) {
           setAttorneyProfile(data.data);
-          document.title = data.data.firmName || 'LegalScout';
         }
       } catch (error) {
         console.error('Error:', error);
@@ -24,6 +24,13 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
+      <Head>
+        <title>{attorneyProfile?.firmName || 'LegalScout'}</title>
+        <meta 
+          name="description" 
+          content={`Connect with ${attorneyProfile?.firmName || 'LegalScout'} - AI-powered legal assistance`} 
+        />
+      </Head>
       <header>
         <nav>
           <div className="logo-container">

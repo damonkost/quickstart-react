@@ -1,15 +1,9 @@
 {
   "version": 2,
-  "framework": "nextjs",
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/v1/attorneys",
-      "methods": ["GET"],
-      "dest": "/api/v1/attorneys"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/"
+      "source": "/api/:path*",
+      "destination": "/api/:path*"
     }
   ],
   "headers": [
@@ -23,6 +17,10 @@
         {
           "key": "Access-Control-Allow-Methods",
           "value": "GET, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type"
         }
       ]
     }

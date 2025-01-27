@@ -9,13 +9,34 @@ function MyApp({ Component, pageProps }) {
     const fetchProfile = async () => {
       try {
         const subdomain = window.location.hostname.split('.')[0];
-        const response = await fetch(`/api/v1/attorneys?subdomain=${subdomain}`);
+        console.log('Fetching profile for subdomain:', subdomain);
+        
+        // Use relative URL to avoid CORS issues
+        const response = await fetch(`/api/v1/attorneys?subdomain=${subdomain}`, {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const data = await response.json();
+        console.log('API Response:', data);
+
         if (data?.data) {
           setAttorneyProfile(data.data);
+          document.title = data.data.firmName || 'LegalScout';
         }
       } catch (error) {
-        console.error('Error:', error);
+        console.error('Error fetching profile:', error);
+        // Set default profile on error
+        setAttorneyProfile({
+          firmName: 'LegalScout',
+          logo: "https://res.cloudinary.com/glide/image/fetch/f_auto,c_limit/https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fglide-prod.appspot.com%2Fo%2Ficon-images%252Fanonymous-4ec86c98-f143-4160-851d-892f167b223c.png%3Falt%3Dmedia%26token%3Dcdc26513-26ae-48f6-b085-85b8bb806c4c"
+        });
       }
     };
 

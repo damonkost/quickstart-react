@@ -1,9 +1,10 @@
+import { parse } from 'url';
+
 export default async function handler(req, res) {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
-  res.setHeader('Access-Control-Max-Age', '86400'); // 24 hours
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   // Handle preflight request (OPTIONS)
   if (req.method === 'OPTIONS') {
@@ -11,20 +12,21 @@ export default async function handler(req, res) {
     return;
   }
 
+  // Parse URL
+  const { pathname } = parse(req.url, true);
+  console.log('Request path:', pathname);
+  console.log('Request method:', req.method);
+
   // Handle POST request
   if (req.method === 'POST') {
     try {
-      // Log the incoming request
-      console.log('Received request:', {
-        method: req.method,
-        headers: req.headers,
-        body: req.body
-      });
+      // Log headers and body
+      console.log('Headers:', req.headers);
+      console.log('Body:', req.body);
 
-      // Send response
       return res.status(200).json({
         success: true,
-        message: 'Data received',
+        message: 'POST request received',
         data: req.body
       });
     } catch (error) {

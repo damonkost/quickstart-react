@@ -12,7 +12,6 @@ function MyApp({ Component, pageProps }) {
         const data = await response.json();
         if (data?.data) {
           setAttorneyProfile(data.data);
-          // Update document title
           document.title = data.data.firmName || 'LegalScout';
         }
       } catch (error) {
@@ -48,9 +47,7 @@ function MyApp({ Component, pageProps }) {
             <span>with an ideal human lawyer,</span>
             <span>knowledgeable about your case and eager to help.</span>
           </p>
-          <div id="root">
-            <Component {...pageProps} attorneyProfile={attorneyProfile} />
-          </div>
+          <Component {...pageProps} attorneyProfile={attorneyProfile} />
         </div>
       </main>
     </>

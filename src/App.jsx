@@ -16,7 +16,7 @@ const App = () => {
 
   const [assistantIsSpeaking, setAssistantIsSpeaking] = useState(false);
   const [volumeLevel, setVolumeLevel] = useState(0);
-  const [microphoneAllowed, setMicrophoneAllowed] = useState(false); // Add state for microphone permission
+  const [microphoneAllowed, setMicrophoneAllowed] = useState(false);
 
   const { showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage } = usePublicKeyInvalid();
 
@@ -81,17 +81,35 @@ const App = () => {
     const fetchAttorneyProfile = async () => {
       try {
         const subdomain = window.location.hostname.split('.')[0];
+        console.log('Debug - Subdomain:', subdomain);
+
+        if (subdomain === 'localhost' || subdomain === 'legalscout') {
+          console.log('Debug - Using default profile');
+          return setAttorneyProfile({
+            firmName: 'LegalScout',
+            vapiInstructions: null
+          });
+        }
+
         const response = await fetch(`/api/v1/attorneys?subdomain=${subdomain}`);
         const data = await response.json();
         
-        if (data && data.vapiInstructions) {
-          setAttorneyProfile(data);
+        console.log('Debug - Attorney data:', data);
+
+        if (data && data.data) {
+          setAttorneyProfile(data.data);
         } else {
-          console.warn('No VAPI instructions found for subdomain:', subdomain);
+          setAttorneyProfile({
+            firmName: 'LegalScout',
+            vapiInstructions: null
+          });
         }
       } catch (error) {
-        console.error('Error fetching attorney profile:', error);
-        setError('Failed to load attorney configuration');
+        console.error('Error:', error);
+        setAttorneyProfile({
+          firmName: 'LegalScout',
+          vapiInstructions: null
+        });
       }
     };
 
@@ -101,21 +119,23 @@ const App = () => {
   const startCall = async () => {
     try {
       setConnecting(true);
-      
-      // Get the base VAPI configuration
+
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+      setMicrophoneAllowed(true);
+
       const assistantOverrides = {
-        name: attorneyProfile?.firmName || 'LegalScout',
-        instructions: attorneyProfile?.vapiInstructions || 'I am a legal assistant',
-        maxDuration: 3600
+        transcriber: {
+          provider: "deepgram",
+          model: "nova-2",
+          language: "en-US",
+        },
+        recordingEnabled: true,
+        instructions: attorneyProfile?.vapiInstructions || 'I am a legal assistant'
       };
 
-      console.log('Starting VAPI with config:', assistantOverrides);
-
-      // Initialize VAPI with attorney-specific instructions
       vapi.start('e3fff1dd-2e82-4cce-ac6c-8c3271eb0865', assistantOverrides);
-      
     } catch (error) {
-      console.error("Error starting call:", error);
+      console.error("Error:", error);
       setError('Failed to start call');
     } finally {
       setConnecting(false);
@@ -141,13 +161,29 @@ const App = () => {
       }}
     >
       {!connected ? (
-        <Button
-          label={`Talk to ${attorneyProfile?.firmName || 'LegalScout'}`}
-          onClick={startCall}
-          isLoading={connecting}
-          disabled={!microphoneAllowed} // Disable button if mic access is not allowed
-          icon={<LegalScoutIcon />} 
-        />
+        <>
+          {attorneyProfile?.firmName && !error && (
+            <h1>{attorneyProfile.firmName}</h1>
+          )}
+          
+          {attorneyProfile?.logo && (
+            <img 
+              src={attorneyProfile.logo} 
+              alt={`${attorneyProfile.firmName || 'LegalScout'} logo`}
+              onError={(e) => {
+                console.log('Logo failed to load');
+                e.target.style.display = 'none';
+              }}
+            />
+          )}
+
+          <Button
+            onClick={startCall}
+            disabled={connecting}
+            label={connecting ? 'Connecting...' : `Talk to ${attorneyProfile?.firmName || 'LegalScout'}`}
+            logo={attorneyProfile?.logo || "https://res.cloudinary.com/glide/image/fetch/f_auto,c_limit/https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fglide-prod.appspot.com%2Fo%2Ficon-images%252Fanonymous-4ec86c98-f143-4160-851d-892f167b223c.png%3Falt%3Dmedia%26token%3Dcdc26513-26ae-48f6-b085-85b8bb806c4c"}
+          />
+        </>
       ) : (
         <ActiveCallDetail
           assistantIsSpeaking={assistantIsSpeaking}

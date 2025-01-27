@@ -16,20 +16,5 @@
         }
       ]
     }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/",
-      "headers": {
-        "x-subdomain": ":subdomain"
-      }
-    }
-  ],
-  "wildcard": [
-    {
-      "domain": "legalscout.net",
-      "value": "cname.vercel-dns.com"
-    }
   ]
 } 

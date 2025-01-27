@@ -156,6 +156,8 @@ const App = () => {
         flexDirection: 'column' // Added to stack elements vertically
       }}
     >
+      {console.log('Rendering h1 with:', attorneyProfile?.firmName || 'LegalScout')}
+      
       {!connected ? (
         <>
           {attorneyProfile?.firmName && !error && (

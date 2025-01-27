@@ -11,7 +11,30 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.get('/api/attorneys', (req, res) => {
-  // ... (existing GET request handler logic)
+  const subdomain = req.query.subdomain;
+  const filePath = path.join(__dirname, '../../subdomain_config.json');
+
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading subdomain_config.json:', err);
+      return res.status(500).json({ error: 'Failed to fetch attorney data' });
+    }
+
+    try {
+      const configData = JSON.parse(data);
+      
+      // If subdomain is provided, return specific attorney data
+      if (subdomain && configData[subdomain]) {
+        return res.json(configData[subdomain]);
+      }
+      
+      // Otherwise return all attorney data
+      res.json(configData);
+    } catch (parseError) {
+      console.error('Error parsing subdomain_config.json:', parseError);
+      return res.status(500).json({ error: 'Failed to fetch attorney data' });
+    }
+  });
 });
 
 // POST request handler (to update attorney data)

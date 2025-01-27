@@ -1,11 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  distDir: '.next',
-  output: 'export',
-  images: {
-    unoptimized: true
-  },
+  output: 'standalone',
   webpack: (config, { isServer }) => {
     config.module.rules.push({
       test: /\.css$/,

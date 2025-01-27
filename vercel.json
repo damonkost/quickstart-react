@@ -1,9 +1,18 @@
 {
   "version": 2,
-  "rewrites": [
-    { 
-      "source": "/api/:path*",
-      "destination": "/api/:path*"
+  "routes": [
+    {
+      "src": "/api/v1/check-config",
+      "dest": "/api/v1/check-config",
+      "headers": {
+        "cache-control": "s-maxage=1, stale-while-revalidate"
+      }
     }
-  ]
+  ],
+  "functions": {
+    "api/v1/**": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  }
 } 

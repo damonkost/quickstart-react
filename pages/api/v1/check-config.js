@@ -2,6 +2,9 @@ import fs from 'fs';
 import path from 'path';
 
 export default function handler(req, res) {
+  // Set caching headers
+  res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+  
   try {
     // Get the config file path
     const configPath = path.join(process.cwd(), 'src/utils/subdomain_config.json');

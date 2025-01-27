@@ -1,8 +1,11 @@
 export default function handler(req, res) {
+  // Set JSON content type
+  res.setHeader('Content-Type', 'application/json');
+
   // Log the request
   console.log('API Request:', {
     method: req.method,
-    url: req.url,
+    path: req.url,
     headers: req.headers
   });
 
@@ -18,11 +21,10 @@ export default function handler(req, res) {
   // POST request
   if (req.method === 'POST') {
     try {
-      const data = req.body;
       return res.status(200).json({
         status: 'success',
         message: 'Data received',
-        data: data
+        data: req.body
       });
     } catch (error) {
       return res.status(500).json({

@@ -81,17 +81,18 @@ const App = () => {
     const fetchAttorneyProfile = async () => {
       try {
         const subdomain = window.location.hostname.split('.')[0];
-        console.log('Current subdomain:', subdomain); // Debug log
+        console.log('Current subdomain:', subdomain);
 
-        const response = await fetch(`/api/v1/attorneys?subdomain=${subdomain}`);
+        // Update to use HTTPS and full domain
+        const response = await fetch(`https://legalscout.net/api/v1/attorneys?subdomain=${subdomain}`);
         const data = await response.json();
         
-        console.log('Raw API response:', data); // Debug log
-        console.log('Attorney profile data:', data.data); // Debug log
+        console.log('Raw API response:', data);
+        console.log('Attorney profile data:', data.data);
 
         if (data && data.data) {
           setAttorneyProfile(data.data);
-          console.log('Set attorney profile to:', data.data); // Debug log
+          console.log('Set attorney profile to:', data.data);
         } else {
           console.warn('No attorney data found for subdomain:', subdomain);
           setAttorneyProfile({

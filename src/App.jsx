@@ -162,9 +162,7 @@ const App = () => {
     >
       {!connected ? (
         <>
-          {attorneyProfile?.firmName && !error && (
-            <h1>{attorneyProfile.firmName}</h1>
-          )}
+          <h1>{attorneyProfile?.firmName || 'LegalScout'}</h1>
           
           {attorneyProfile?.logo && (
             <img 
@@ -177,12 +175,14 @@ const App = () => {
             />
           )}
 
-          <Button
-            onClick={startCall}
-            disabled={connecting}
-            label={connecting ? 'Connecting...' : `Talk to ${attorneyProfile?.firmName || 'LegalScout'}`}
-            logo={attorneyProfile?.logo || "https://res.cloudinary.com/glide/image/fetch/f_auto,c_limit/https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fglide-prod.appspot.com%2Fo%2Ficon-images%252Fanonymous-4ec86c98-f143-4160-851d-892f167b223c.png%3Falt%3Dmedia%26token%3Dcdc26513-26ae-48f6-b085-85b8bb806c4c"}
-          />
+          <div className="button-container">
+            <Button
+              onClick={startCall}
+              disabled={connecting}
+              label={connecting ? 'Connecting...' : `Talk to ${attorneyProfile?.firmName || 'LegalScout'}`}
+              logo={attorneyProfile?.logo || "https://res.cloudinary.com/glide/image/fetch/f_auto,c_limit/https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fglide-prod.appspot.com%2Fo%2Ficon-images%252Fanonymous-4ec86c98-f143-4160-851d-892f167b223c.png%3Falt%3Dmedia%26token%3Dcdc26513-26ae-48f6-b085-85b8bb806c4c"}
+            />
+          </div>
         </>
       ) : (
         <ActiveCallDetail

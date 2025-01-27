@@ -81,28 +81,40 @@ const App = () => {
     const fetchAttorneyProfile = async () => {
       try {
         const subdomain = window.location.hostname.split('.')[0];
-        console.log('Current subdomain:', subdomain);
+        console.log('Debug - Subdomain:', subdomain);
 
-        // Update to use HTTPS and full domain
-        const response = await fetch(`https://legalscout.net/api/v1/attorneys?subdomain=${subdomain}`);
-        const data = await response.json();
+        // Force HTTPS and use full URL
+        const baseUrl = process.env.NODE_ENV === 'production' 
+          ? 'https://legalscout.net' 
+          : window.location.origin;
         
-        console.log('Raw API response:', data);
-        console.log('Attorney profile data:', data.data);
+        const apiUrl = `${baseUrl}/api/v1/attorneys?subdomain=${subdomain}`;
+        console.log('Debug - API URL:', apiUrl);
 
-        if (data && data.data) {
+        const response = await fetch(apiUrl, {
+          headers: {
+            'Accept': 'application/json',
+            'Cache-Control': 'no-cache'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Debug - API Response:', data);
+
+        if (data?.data) {
           setAttorneyProfile(data.data);
-          console.log('Set attorney profile to:', data.data);
-        } else {
-          console.warn('No attorney data found for subdomain:', subdomain);
-          setAttorneyProfile({
-            firmName: 'LegalScout',
-            logo: "https://res.cloudinary.com/glide/image/fetch/f_auto,c_limit/https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fglide-prod.appspot.com%2Fo%2Ficon-images%252Fanonymous-4ec86c98-f143-4160-851d-892f167b223c.png%3Falt%3Dmedia%26token%3Dcdc26513-26ae-48f6-b085-85b8bb806c4c"
-          });
+          console.log('Debug - Set attorney profile:', data.data);
         }
       } catch (error) {
-        console.error('Error fetching attorney profile:', error);
-        setError('Failed to load attorney configuration');
+        console.error('Error fetching profile:', error);
+        setAttorneyProfile({
+          firmName: 'LegalScout',
+          logo: "https://res.cloudinary.com/glide/image/fetch/f_auto,c_limit/https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fglide-prod.appspot.com%2Fo%2Ficon-images%252Fanonymous-4ec86c98-f143-4160-851d-892f167b223c.png%3Falt%3Dmedia%26token%3Dcdc26513-26ae-48f6-b085-85b8bb806c4c"
+        });
       }
     };
 
@@ -156,7 +168,7 @@ const App = () => {
         flexDirection: 'column' // Added to stack elements vertically
       }}
     >
-      {console.log('Rendering h1 with:', attorneyProfile?.firmName || 'LegalScout')}
+      {console.log('Rendering with profile:', attorneyProfile)}
       
       {!connected ? (
         <>

@@ -11,6 +11,7 @@ const vapi = new Vapi("310f0d43-27c2-47a5-a76d-e55171d024f7"); // Replace with y
 const App = () => {
   const [connecting, setConnecting] = useState(false);
   const [connected, setConnected] = useState(false);
+  const [attorneyProfile, setAttorneyProfile] = useState(null);
 
   const [assistantIsSpeaking, setAssistantIsSpeaking] = useState(false);
   const [volumeLevel, setVolumeLevel] = useState(0);
@@ -73,6 +74,31 @@ const App = () => {
       vapi.off("error", handleError);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const fetchAttorneyProfile = async () => {
+      try {
+        const subdomain = window.location.hostname.split('.')[0];
+        // Update this URL to point to your attorney profile endpoint
+        const response = await fetch(`/api/attorney-profile?subdomain=${subdomain}`, {
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch attorney profile');
+        }
+        
+        const data = await response.json();
+        setAttorneyProfile(data);
+      } catch (error) {
+        console.error("Error fetching attorney profile:", error);
+      }
+    };
+
+    fetchAttorneyProfile();
   }, []);
 
   // call start handler

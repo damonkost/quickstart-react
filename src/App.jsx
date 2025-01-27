@@ -81,40 +81,34 @@ const App = () => {
     const fetchAttorneyProfile = async () => {
       try {
         const subdomain = window.location.hostname.split('.')[0];
-        console.log('Debug - Subdomain:', subdomain);
-
-        if (subdomain === 'localhost' || subdomain === 'legalscout') {
-          console.log('Debug - Using default profile');
-          return setAttorneyProfile({
-            firmName: 'LegalScout',
-            vapiInstructions: null
-          });
-        }
+        console.log('Current subdomain:', subdomain); // Debug log
 
         const response = await fetch(`/api/v1/attorneys?subdomain=${subdomain}`);
         const data = await response.json();
         
-        console.log('Debug - Attorney data:', data);
+        console.log('Raw API response:', data); // Debug log
+        console.log('Attorney profile data:', data.data); // Debug log
 
         if (data && data.data) {
           setAttorneyProfile(data.data);
+          console.log('Set attorney profile to:', data.data); // Debug log
         } else {
+          console.warn('No attorney data found for subdomain:', subdomain);
           setAttorneyProfile({
             firmName: 'LegalScout',
-            vapiInstructions: null
+            logo: "https://res.cloudinary.com/glide/image/fetch/f_auto,c_limit/https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fglide-prod.appspot.com%2Fo%2Ficon-images%252Fanonymous-4ec86c98-f143-4160-851d-892f167b223c.png%3Falt%3Dmedia%26token%3Dcdc26513-26ae-48f6-b085-85b8bb806c4c"
           });
         }
       } catch (error) {
-        console.error('Error:', error);
-        setAttorneyProfile({
-          firmName: 'LegalScout',
-          vapiInstructions: null
-        });
+        console.error('Error fetching attorney profile:', error);
+        setError('Failed to load attorney configuration');
       }
     };
 
     fetchAttorneyProfile();
   }, []);
+
+  console.log('Current attorney profile state:', attorneyProfile); // Debug log
 
   const startCall = async () => {
     try {
@@ -158,11 +152,14 @@ const App = () => {
         height: "100vh",
         justifyContent: "center",
         alignItems: "center",
+        flexDirection: 'column' // Added to stack elements vertically
       }}
     >
       {!connected ? (
         <>
-          <h1>{attorneyProfile?.firmName || 'LegalScout'}</h1>
+          {attorneyProfile?.firmName && !error && (
+            <h1>{attorneyProfile.firmName}</h1>
+          )}
           
           {attorneyProfile?.logo && (
             <img 

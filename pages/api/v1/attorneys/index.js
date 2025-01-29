@@ -14,10 +14,10 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
       // Required parameters
-      const subdomain = req.query.subdomain;
-      const firmName = req.query.firmName;
-      const logo = req.query.logo;
-      const vapiInstructions = req.query.instructions;
+      const subdomain = decodeURIComponent(req.query.subdomain);
+      const firmName = decodeURIComponent(req.query.firmName);
+      const logo = decodeURIComponent(req.query.logo);
+      const vapiInstructions = decodeURIComponent(req.query.instructions).replace(/\\n/g, '\n');
 
       if (!subdomain || !firmName) {
         return res.status(400).json({

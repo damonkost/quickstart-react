@@ -1,0 +1,9 @@
+{
+  "method": "post",
+  "body": {
+    "subdomain": "{{lower(Name).replace(' ', '-')}}",
+    "firmName": "{{Name}}",
+    "logo": "{{vGHAA[0]}}",
+    "instructions": "{{ftp0j}}"
+  }
+} 

@@ -4,6 +4,14 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/v1/attorneys',
+        destination: '/api/v1/attorneys/index.js',
+      }
+    ];
+  }
 };
 
 module.exports = nextConfig; 

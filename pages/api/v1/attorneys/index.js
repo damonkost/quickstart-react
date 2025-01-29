@@ -1,4 +1,6 @@
 import { getAttorneyConfig } from '../../../../src/config/attorneys';
+import fs from 'fs';
+import path from 'path';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -11,21 +13,43 @@ export default async function handler(req, res) {
 
   if (req.method === 'GET') {
     try {
+      // Required parameters
       const subdomain = req.query.subdomain;
-      console.log('Handling request for subdomain:', subdomain);
+      const firmName = req.query.firmName;
+      const logo = req.query.logo;
+      const vapiInstructions = req.query.instructions;
 
-      const config = getAttorneyConfig();
-      const attorneyData = config[subdomain] || config['default'];
-
-      if (!attorneyData) {
-        return res.status(404).json({ status: 'error', message: 'Attorney not found' });
+      if (!subdomain || !firmName) {
+        return res.status(400).json({
+          status: 'error',
+          message: 'Missing required parameters: subdomain and firmName'
+        });
       }
 
-      console.log('Returning attorney data:', attorneyData);
+      // Update configuration
+      const config = getAttorneyConfig();
+      config[subdomain] = {
+        firmName,
+        logo,
+        vapiInstructions: vapiInstructions || config['default'].vapiInstructions
+      };
+
+      // Save updates (replace with database call later)
+      fs.writeFileSync(
+        path.resolve(process.cwd(), 'src/config/attorneys.js'),
+        `export const getAttorneyConfig = () => (${JSON.stringify(config, null, 2)});`
+      );
+
       return res.status(200).json({
         status: 'success',
-        data: attorneyData
+        data: {
+          subdomain,
+          firmName,
+          logo,
+          vapiInstructions
+        }
       });
+
     } catch (error) {
       console.error('API Error:', error);
       return res.status(500).json({

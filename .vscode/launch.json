@@ -16,5 +16,9 @@
             "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}/pages"
         }
-    ]
+    ],
+    "settings": {
+        "npm.autoDetect": "on",
+        "typescript.check.npmIsInstalled": true
+    }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import './App.css';  // Ensure the CSS file is imported
 
 const DEFAULT_LOGO_PATH = '/images/default-logo.png';
 
@@ -24,17 +25,14 @@ const App = ({ attorneyProfile }) => {
   // console.log('Received Attorney Profile:', attorneyProfile);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        width: '100vw',
-        height: '100vh',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        gap: '2rem',
-      }}
-    >
+    <div className="App">
+      <div className="gradient-bg">
+        <div className="gradients-container">
+          <div className="bubble bubble-1"></div>
+          <div className="bubble bubble-2"></div>
+          <div className="bubble bubble-3"></div>
+        </div>
+      </div>
       <Head>
         <title>{title}</title> {/* Dynamic Title */}
       </Head>

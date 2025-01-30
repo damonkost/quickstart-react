@@ -53,7 +53,6 @@ nav {
   align-items: center;
   min-height: 100vh;
   padding-top: 60px; /* Space for fixed header */
-  background-color: #fff;
 }
 
 .statement p {

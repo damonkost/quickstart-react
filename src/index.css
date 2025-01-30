@@ -28,7 +28,7 @@ body {
     overflow: hidden;
     top: 60px;
     background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
-    z-index: 1;
+    z-index: 0;
 }
 
 .gradients-container {
@@ -113,7 +113,7 @@ nav {
   min-height: 100vh;
   padding-top: 60px;
   position: relative;
-  z-index: 2;
+  z-index: 1;
 }
 
 .hero img {

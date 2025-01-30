@@ -6,7 +6,11 @@
             "request": "launch",
             "name": "Launch LegalScout",
             "url": "http://localhost:3000",
-            "webRoot": "${workspaceFolder}/pages"
+            "webRoot": "${workspaceFolder}",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+                "webpack://_N_E/*": "${webRoot}/*"
+            }
         }
     ]
 }

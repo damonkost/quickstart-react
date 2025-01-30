@@ -51,7 +51,7 @@ const App = ({ attorneyProfile }) => {
           </div>
         </nav>
       </header>
-      <main className="hero">
+      <main className="hero" style={{ background: 'url(/images/background.jpg) no-repeat center center fixed', backgroundSize: 'cover' }}>
         <div className="statement">
           <p>
             <span>Use our free AI to be matched</span>

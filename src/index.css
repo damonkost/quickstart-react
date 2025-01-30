@@ -35,7 +35,7 @@ body {
     height: 100vh;
     position: fixed;
     overflow: hidden;
-    top: 60px;
+    top: 0;  /* Ensure it starts from the top */
     background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
     z-index: 0;
 }

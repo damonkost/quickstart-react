@@ -53,6 +53,9 @@ nav {
   align-items: center;
   min-height: 100vh;
   padding-top: 60px; /* Space for fixed header */
+  background-color: transparent !important;
+  position: relative;
+  z-index: 2;
 }
 
 .statement p {
@@ -75,4 +78,9 @@ button {
 button img {
   max-width: 30px;
   margin-right: 10px;
+}
+
+.gradient-bg {
+  z-index: 1;
+  top: 60px; /* Match header height */
 } 

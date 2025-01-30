@@ -24,10 +24,11 @@ body {
 .gradient-bg {
     width: 100vw;
     height: 100vh;
-    position: absolute;
+    position: fixed;
     overflow: hidden;
-    top: 60px; /* Match header height */
+    top: 60px;
     background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
+    z-index: 1;
 }
 
 .gradients-container {
@@ -106,9 +107,13 @@ nav {
 }
 
 .hero {
-  text-align: center;
-  padding: 70px 10px 10px 10px; /* Adjusted padding */
-  color: #333; /* Ensure text color is set */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 60px;
+  position: relative;
+  z-index: 2;
 }
 
 .hero img {

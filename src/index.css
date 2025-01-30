@@ -1,10 +1,54 @@
 /* index.css */
 
+:root {
+    --color-bg1: #0D0D0D;
+    --color-bg2: #000000;
+    --color1: 41, 121, 255;
+    --color2: 242, 101, 34;
+    --color3: 255, 255, 255;
+    --color4: 15, 76, 129;
+    --color5: 242, 153, 74;
+    --color-interactive: 100, 181, 246;
+    --circle-size: 80%;
+    --blending: hard-light;
+}
+
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+    overflow: hidden;
+    background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
+    height: 100vh;
+    position: relative;
+}
+
+.gradient-bg {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    overflow: hidden;
+    top: 60px; /* Match header height */
+    background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
+}
+
+.gradients-container {
+    filter: blur(40px);
+    width: 100%;
+    height: 100%;
+}
+
+.bubble {
+    position: absolute;
+    background: radial-gradient(circle, rgba(var(--color1), 0.8) 0%, rgba(var(--color1), 0) 50%);
+    mix-blend-mode: var(--blending);
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: moveInCircle 20s infinite linear;
+}
+
+@keyframes moveInCircle {
+    0% { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+    50% { transform: rotate(180deg) translateX(100px) rotate(-180deg); }
+    100% { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
 }
 
 p {

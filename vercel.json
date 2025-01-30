@@ -1,6 +1,7 @@
-{ "buildCommand": "yarn build",
+{
+  "buildCommand": "next build",
   "outputDirectory": "dist",
-  "framework": "create-react-app",
+  "framework": "nextjs",
   "rewrites": [
     {
       "source": "/favicon.ico",

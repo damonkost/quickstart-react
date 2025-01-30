@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import ActiveCallDetail from "./components/ActiveCallDetail";
-import Button from "./components/base/Button";
+import ActiveCallDetail from "../src/components/ActiveCallDetail";
+import Button from "../src/components/base/Button";
 import Vapi from "@vapi-ai/web";
-import { isPublicKeyMissingError } from "./utils";
-import { getAttorneyConfig } from './config/attorneys';
+import { isPublicKeyMissingError } from "../src/utils";
+import { getAttorneyConfig } from '../src/config/attorneys';
 import Head from 'next/head';
 
 // Put your Vapi Public Key below.

@@ -14,58 +14,52 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
       // Required parameters
-      const subdomain = decodeURIComponent(req.query.subdomain);
-      const firmName = decodeURIComponent(req.query.firmName);
-      const logo = decodeURIComponent(req.query.logo);
-      const vapiInstructions = decodeURIComponent(req.query.instructions).replace(/\\n/g, '\n');
+      const subdomain = decodeURIComponent(req.query.subdomain || '');
 
-      if (!subdomain || !firmName) {
+      if (!subdomain) {
         return res.status(400).json({
           status: 'error',
-          message: 'Missing required parameters: subdomain and firmName'
+          message: 'Missing required parameter: subdomain'
         });
       }
 
-      // Update configuration
       const config = getAttorneyConfig();
-      config[subdomain] = {
-        firmName,
-        logo,
-        vapiInstructions: vapiInstructions || config['default'].vapiInstructions
-      };
+      const attorneyConfig = config[subdomain] || config['default'];
 
-      // Save updates (replace with database call later)
-      fs.writeFileSync(
-        path.resolve(process.cwd(), 'src/config/attorneys.js'),
-        `export const getAttorneyConfig = () => (${JSON.stringify(config, null, 2)});`
-      );
+      // Only update config if optional parameters are provided
+      if (req.query.firmName || req.query.logo || req.query.instructions) {
+        const firmName = decodeURIComponent(req.query.firmName || attorneyConfig.firmName);
+        const logo = decodeURIComponent(req.query.logo || attorneyConfig.logo);
+        const vapiInstructions = decodeURIComponent(req.query.instructions || '').replace(/\\n/g, '\n') || attorneyConfig.vapiInstructions;
 
-      return res.status(200).json({
-        status: 'success',
-        data: {
-          subdomain,
+        config[subdomain] = {
           firmName,
           logo,
           vapiInstructions
-        }
-      });
+        };
 
+        // Save updates (replace with database call later)
+        fs.writeFileSync(
+          path.resolve(process.cwd(), 'src/config/attorneys.js'),
+          `export const getAttorneyConfig = () => (${JSON.stringify(config, null, 2)});`
+        );
+      }
+
+      return res.status(200).json({
+        status: 'success',
+        data: config[subdomain] || config['default']
+      });
     } catch (error) {
-      console.error('API Error:', error);
+      console.error('Error handling attorney request:', error);
       return res.status(500).json({
         status: 'error',
-        message: error.message
+        message: 'Internal server error'
       });
     }
   }
 
-  if (req.method === 'POST') {
-    // Handle body instead of query
-    const { subdomain, firmName, logo, instructions } = req.body;
-  }
-
-  return res.status(405).json({ 
+  return res.status(405).json({
     status: 'error',
-    message: 'Method not allowed' 
+    message: 'Method not allowed'
   });
-} 
+}

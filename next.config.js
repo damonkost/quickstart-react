@@ -4,16 +4,22 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Remove rewrites since Next.js handles API routes automatically
-  // Add webpack configuration for proper file handling
   webpack: (config, { isServer }) => {
-    // Handle CSS imports
-    config.module.rules.push({
-      test: /\.css$/,
-      use: ['style-loader', 'css-loader'],
-    });
+    if (!isServer) {
+      // Client-side only
+      config.module.rules.push({
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      });
+    }
     return config;
   },
-};
+  // Ensure pages are properly exported
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
+  // Add trailing slash to URLs
+  trailingSlash: true,
+  // Enable source maps in development
+  productionBrowserSourceMaps: true,
+}
 
 module.exports = nextConfig;

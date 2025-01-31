@@ -1,12 +1,16 @@
-import '../src/styles/index.css'; // Import global CSS
-// import ErrorBoundary from '../src/components/ErrorBoundary';
+import '../src/styles/index.css';
+import Head from 'next/head';
 
 function MyApp({ Component, pageProps }) {
   return (
-    // <ErrorBoundary>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>LegalScout</title>
+      </Head>
       <Component {...pageProps} />
-    // </ErrorBoundary>
+    </>
   );
 }
 
-export default MyApp; 
+export default MyApp;

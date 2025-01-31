@@ -4,14 +4,16 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  async rewrites() {
-    return [
-      {
-        source: '/api/v1/attorneys',
-        destination: '/api/v1/attorneys/index.js',
-      }
-    ];
-  }
+  // Remove rewrites since Next.js handles API routes automatically
+  // Add webpack configuration for proper file handling
+  webpack: (config, { isServer }) => {
+    // Handle CSS imports
+    config.module.rules.push({
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader'],
+    });
+    return config;
+  },
 };
 
-module.exports = nextConfig; 
+module.exports = nextConfig;

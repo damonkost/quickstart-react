@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import ActiveCallDetail from "../src/components/ActiveCallDetail";
-import Button from "../src/components/base/Button";
+  import React, { useEffect, useState } from 'react';
+import ActiveCallDetail from "../src/components/ActiveCallDetail.jsx";
+import Button from "../src/components/base/Button.jsx";
 import Vapi from "@vapi-ai/web";
 import { isPublicKeyMissingError } from "../src/utils";
 import { getAttorneyConfig } from '../src/config/attorneys';
@@ -34,7 +34,7 @@ const App = () => {
 
         const result = await response.json();
         if (result.status === 'success') {
-          setAttorneyProfile(result.data);
+          setAttorneyProfile(result.data);  
           document.title = result.data.firmName; // Set the document title dynamically
         } else {
           throw new Error(result.message);

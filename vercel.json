@@ -2,16 +2,6 @@
   "version": 2,
   "framework": "nextjs",
   "buildCommand": "next build",
-  "rewrites": [
-    {
-      "source": "/favicon.ico",
-      "destination": "/public/favicon.ico"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/$1"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",

@@ -12,12 +12,9 @@
   "devDependencies": {
     "@types/node": "^20.0.0",
     "@types/react": "^18.2.0",
-    "css-loader": "^6.8.1",
-    "style-loader": "^3.3.3",
-    "typescript": "^5.0.0",
-    "@babel/core": "^7.23.0",
-    "@babel/preset-react": "^7.22.0",
-    "babel-loader": "^9.1.0"
+    "@types/react-dom": "^18.2.0",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "^14.0.0"
   },
   "scripts": {
     "dev": "next dev",

@@ -1,7 +1,8 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     background-color: #f4f4f4;
 }
 
@@ -11,26 +12,18 @@ p {
 }
 
 header {
-  width: 100%;
+  background-color: #f8f9fa;
+  padding: 1rem;
   position: fixed;
+  width: 100%;
   top: 0;
   left: 0;
-  z-index: 100;
-  background-color: #171717;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* Add border temporarily for debugging */
-  border-bottom: 2px solid red;
-}
-
-nav {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 15px 20px;
+  z-index: 1000;
 }
 
 .logo-container {
-  margin-right: auto;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .logo {
@@ -39,23 +32,42 @@ nav {
 }
 
 .nav-links {
-  display: flex;
-  gap: 20px;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 2rem;
 }
 
 .nav-links a {
-  color: white;
+  margin: 0 1rem;
   text-decoration: none;
-  font-weight: bold;
+  color: #333;
+  padding: 0.7rem 1rem;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #bdcde0;
 }
 
 .hero {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding-top: 60px; /* Space for fixed header */
-  background-color: #fff;
+  background-color: #000;
+  margin-top: 80px; /* Space for the fixed header */
+}
+
+.statement {
+  text-align: center;
+  color: #b0bac3;
+}
+
+.statement p span {
+  display: block;
+  margin: 0.5rem 0;
 }
 
 .statement p {

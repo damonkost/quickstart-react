@@ -12,7 +12,7 @@ p {
 }
 
 header {
-  background-color: #f8f9fa; /* This is the expected nav bar color */
+  background-color: #f8f9fa; /* Light background as in the original design */
   padding: 1rem;
   position: fixed;
   width: 100%;
@@ -63,8 +63,8 @@ nav {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #000;
-  margin-top: 80px; /* Accounts for the fixed header */
+  background-color: #000000;
+  margin-top: 80px; /* Accommodates the fixed header */
 }
 
 .statement {

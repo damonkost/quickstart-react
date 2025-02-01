@@ -1,10 +1,11 @@
-  import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Head from 'next/head';
+import App from '../src/components/App';
 import ActiveCallDetail from "../src/components/ActiveCallDetail.jsx";
 import Button from "../src/components/base/Button.jsx";
 import Vapi from "@vapi-ai/web";
 import { isPublicKeyMissingError } from "../src/utils";
 import { getAttorneyConfig } from '../src/config/attorneys';
-import Head from 'next/head';
 
 // Put your Vapi Public Key below.
 const vapi = new Vapi("310f0d43-27c2-47a5-a76d-e55171d024f7");
@@ -142,17 +143,8 @@ const Home = () => {
   }
 
   return (
-    <div>
-      <Head>
-        <title>{attorneyProfile?.firmName || 'LegalScout'}</title>
-      </Head>
+    <App attorneyProfile={attorneyProfile}>
       <div>
-        {attorneyProfile && (
-          <div>
-            <img src={attorneyProfile.logo} alt={attorneyProfile.firmName} />
-            <h1>{attorneyProfile.firmName}</h1>
-          </div>
-        )}
         <Button
           label={connected ? "End Call" : connecting ? "Connecting..." : "Start Call"}
           onClick={connected ? handleStopClick : handleStartClick}
@@ -177,7 +169,7 @@ const Home = () => {
           </div>
         )}
       </div>
-    </div>
+    </App>
   );
 };
 

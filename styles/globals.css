@@ -12,13 +12,20 @@ p {
 }
 
 header {
-  background-color: #f8f9fa;
+  background-color: #f8f9fa; /* This is the expected nav bar color */
   padding: 1rem;
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 1000;
+}
+
+nav {
+  display: flex; /* Make the nav a flex container */
+  align-items: center; /* Vertically align items */
+  width: 100%;
+  padding: 15px 20px; /* Add padding for height */
 }
 
 .logo-container {
@@ -57,7 +64,7 @@ header {
   align-items: center;
   min-height: 100vh;
   background-color: #000;
-  margin-top: 80px; /* Space for the fixed header */
+  margin-top: 80px; /* Accounts for the fixed header */
 }
 
 .statement {
@@ -68,12 +75,6 @@ header {
 .statement p span {
   display: block;
   margin: 0.5rem 0;
-}
-
-.statement p {
-  font-size: 1.5rem;
-  text-align: center;
-  margin-bottom: 2rem;
 }
 
 button {

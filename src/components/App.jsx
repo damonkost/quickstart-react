@@ -2,23 +2,13 @@ import React from 'react';
 import Head from 'next/head';
 
 const App = ({ attorneyProfile }) => {
-  const title = attorneyProfile.firmName || 'LegalScout';
-  const logo = attorneyProfile.logo || '/images/default-logo.png'; // Ensure a default logo path
+  const title = attorneyProfile?.firmName || 'LegalScout';
+  const logo = attorneyProfile?.logo || '/images/default-logo.png'; // Ensure a default logo path
 
   console.log('Received Attorney Profile:', attorneyProfile);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        width: '100vw',
-        height: '100vh',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        gap: '2rem',
-      }}
-    >
+    <>
       <Head>
         <title>{title}</title> {/* Dynamic Title */}
       </Head>
@@ -31,15 +21,15 @@ const App = ({ attorneyProfile }) => {
               alt={`${title} Logo`}
               style={{ maxWidth: '150px', height: 'auto' }}
               onError={(e) => {
-                console.log('Logo failed to load:', e);
+                console.error('Logo failed to load', e);
                 e.target.style.display = 'none';
               }}
             />
           </div>
           <div className="nav-links">
-            <a href="https://legalscout.ai/dl/Home">Home</a>
-            <a href="https://legalscout.ai/dl/Cases">My Cases</a>
-            <a href="https://legalscout.ai/dl/About">About</a>
+            <a href="/Home">Home</a>
+            <a href="/Cases">My Cases</a>
+            <a href="/About">About</a>
           </div>
         </nav>
       </header>
@@ -60,7 +50,7 @@ const App = ({ attorneyProfile }) => {
           </button>
         </div>
       </main>
-    </div>
+    </>
   );
 };
 

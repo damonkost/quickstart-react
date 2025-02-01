@@ -11,34 +11,36 @@ p {
 }
 
 header {
-  width: 100%; 
-  position: fixed; /* Keep the header in view */
-  top: 0;         /* Position it at the top */
-  left: 0;        /* Position it at the left */
-  z-index: 100;   /* Ensure it's on top of other elements */
-  background-color: #171717; /* Add background color to the header */
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: #171717;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Add border temporarily for debugging */
+  border-bottom: 2px solid red;
 }
 
 nav {
-  display: flex; /* Make the nav a flex container */
-  align-items: center; /* Vertically align items */
+  display: flex;
+  align-items: center;
   width: 100%;
-  padding: 15px 20px; /* Add padding for height */
+  padding: 15px 20px;
 }
 
 .logo-container {
-  margin-right: auto; /* Push logo to the left */
+  margin-right: auto;
 }
 
 .logo {
-  max-width: 150px; /* Adjust logo size as needed */
+  max-width: 150px;
   height: auto;
 }
 
 .nav-links {
-  display: flex; /* Make the links a flex container */
-  justify-content: center; /* Center the links horizontally */
-  gap: 20px; /* Add spacing between links */
+  display: flex;
+  gap: 20px;
 }
 
 .nav-links a {

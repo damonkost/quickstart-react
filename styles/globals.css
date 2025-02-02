@@ -14,13 +14,15 @@ p {
 
 /* ===== Header & Navigation ===== */
 header {
-  background-color: #171717;
+  background-color: #171717 !important; /* Force dark color */
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 1000;
   padding: 15px 20px;
+  display: flex; /* Add this */
+  align-items: center; /* Add this */
 }
 
 nav {

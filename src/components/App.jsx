@@ -1,12 +1,11 @@
 import React from 'react';
 import Head from 'next/head';
 
-const App = ({ attorneyProfile, children }) => {
-  // Use the attorney profile if provided; otherwise, use default values.
-  const title = attorneyProfile?.firmName || 'LegalScout';
-  const logo =
-    attorneyProfile?.logo ||
-    'https://res.cloudinary.com/glide/image/fetch/f_auto,c_limit/https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fglide-prod.appspot.com%2Fo%2Ficon-images%252Fanonymous-4ec86c98-f143-4160-851d-892f167b223c.png';
+const App = ({ attorneyProfile }) => {
+  const title = attorneyProfile.firmName || 'LegalScout';
+  const logo = attorneyProfile.logo || '/images/default-logo.png'; // Ensure a default logo path
+
+  console.log('Received Attorney Profile:', attorneyProfile);
 
   return (
     <>
@@ -19,9 +18,10 @@ const App = ({ attorneyProfile, children }) => {
             <img
               className="logo"
               src={logo}
-              alt="LegalScout Logo"
+              alt={`${title} Logo`}
+              style={{ maxWidth: '150px', height: 'auto' }}
               onError={(e) => {
-                console.error('Logo failed to load', e);
+                console.log('Logo failed to load:', e);
                 e.target.style.display = 'none';
               }}
             />
@@ -33,8 +33,22 @@ const App = ({ attorneyProfile, children }) => {
           </div>
         </nav>
       </header>
-      <main className="hero" style={{ paddingTop: '80px' }}>
-        {children}
+      <main className="hero">
+        <div className="statement">
+          <p>
+            <span>Use our free AI to be matched</span>
+            <span>with an ideal human lawyer,</span>
+            <span>knowledgeable about your case and eager to help.</span>
+          </p>
+          <button>
+            <img
+              src={logo}
+              alt={`${title} Logo`}
+              style={{ maxWidth: '30px', marginRight: '10px' }}
+            />
+            Talk to {title}
+          </button>
+        </div>
       </main>
     </>
   );

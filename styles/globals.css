@@ -22,10 +22,10 @@ header {
 }
 
 nav {
-  display: flex; /* Make the nav a flex container */
+  display: flex; /* Flex layout for proper alignment */
   align-items: center; /* Vertically align items */
   width: 100%;
-  padding: 15px 20px; /* Add padding for height */
+  padding: 15px 20px; /* Added padding for height */
 }
 
 .logo-container {
@@ -39,42 +39,45 @@ nav {
 }
 
 .nav-links {
-  display: inline-flex;
-  align-items: center;
-  margin-left: 2rem;
+  display: flex; /* Ensure nav links appear in a row */
+  align-items: center; /* Vertically align them */
 }
 
 .nav-links a {
-  margin: 0 1rem;
+  margin: 0 2rem; /* 2rem margin on left/right */
   text-decoration: none;
   color: #333;
-  padding: 0.7rem 1rem;
+  padding: 0.7rem 1rem; /* Padding for a button-like appearance */
   border-radius: 3px;
   transition: background-color 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: #bdcde0;
+  color: #bdcde0; /* Hover text color */
 }
 
 .hero {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 50vh; /* Adjust hero height as needed */
   background-color: #000000;
-  margin-top: 80px; /* Accommodates the fixed header */
+  margin-top: 80px; /* Offset for the fixed header */
 }
 
 .statement {
   text-align: center;
   color: #b0bac3;
+  margin-bottom: 0; /* Reduce space below hero text */
 }
 
 .statement p span {
   display: block;
   margin: 0.5rem 0;
+}
+
+#root {
+  margin-top: 10px; /* Space above content in #root */
 }
 
 button {
